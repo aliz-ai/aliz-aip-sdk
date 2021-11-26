@@ -1,0 +1,51 @@
+version: 2.1
+
+orbs:
+  gcp-cli: circleci/gcp-cli@2.1.0
+
+jobs:
+  build_push_python_package:
+    docker:
+      - image: "cimg/python:3.8"
+    parameters:
+      google-project-id:
+        type: string
+      google-repository:
+        type: string
+      google-location:
+        type: string
+    steps:
+      - checkout
+      - gcp-cli/install:
+          version: "365.0.1"
+      - gcp-cli/initialize
+      - run:
+          name: Build Python package
+          command: python setup.py sdist bdist
+      - run:
+          name: Create repository configuration
+          command: |
+            echo << parameters.google-repository >> > .pypi-repository
+            gcloud artifacts print-settings python \
+                --project=<< parameters.google-project-id >> \
+                --repository=<< parameters.google-repository >> \
+                --location=<< parameters.google-location >> \
+                | head -n -6 | tail -n +3 > .pypirc
+      - run:
+          name: Setup environment
+          command: pip install twine keyrings.google-artifactregistry-auth
+      - run:
+          name: Push Python package
+          command: twine upload dist/* --verbose --config-file .pypirc --repository $(cat .pypi-repository)
+
+workflows:
+  build_test_deploy_python_prod:
+    jobs:
+      - build_push_python_package:
+          google-project-id: "aliz-aip-dev"
+          google-repository: "aip-python"
+          google-location: "europe"
+          filters:
+            branches:
+              only:
+                - master
