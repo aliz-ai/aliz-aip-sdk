@@ -1,0 +1,5 @@
+--extra-index-url "https://europe-python.pkg.dev/aliz-aip-dev/aip-python/simple/"
+ipdb
+ipython
+nose
+-e .

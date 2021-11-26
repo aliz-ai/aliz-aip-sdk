@@ -1,0 +1,6808 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Aliz AIP REST API",
+    "description": "AIP Workspace API.",
+    "contact": {
+      "name": "Aliz Tech",
+      "url": "https://aliz.ai",
+      "email": "aip-support@aliz.ai"
+    },
+    "license": {
+      "name": "Proprietary licensed. Any redistribution is prohibited."
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "bearer-key": []
+    }
+  ],
+  "paths": {
+    "/api/workspace/v1/workspaces/{workspaceId}": {
+      "get": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Retrieves the definition of a workspace within the organization",
+        "operationId": "getWorkspace",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of workspace will be queried",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspace",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Updates the definition of a workspace within the organization",
+        "operationId": "editWorkspace",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of workspace will be edited",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Workspace"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Workspace does not exist",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Successful workspace edit",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Deletes the given workspace within the organization",
+        "operationId": "deleteWorkspace",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of workspace will be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteWorkspaceDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "_empty_"
+          }
+        }
+      }
+    },
+    "/api/workspace/v1/workspaces/{workspaceId}/members": {
+      "get": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "List workspace members",
+        "operationId": "listWorkspaceMember",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "workspace identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuthorizationDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Update workspace member",
+        "operationId": "updateWorkspaceMember",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "workspace identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Create workspace member",
+        "operationId": "createWorkspaceMember",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "workspace identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/{templateId}": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Get all template by id",
+        "operationId": "getTemplate",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Templates JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Template detail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Update template",
+        "operationId": "updateTemplate",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "ID of the template (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTemplateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Update template",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Template"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/{templateId}/workspaces/{workspaceId}/upgrade": {
+      "put": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Upgrade code by template id and the given template variables",
+        "operationId": "upgradeCodeFromTemplate",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "ID of the template (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpgradeRepositoryDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "_empty_",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Repository"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/{templateId}/workspaces/{workspaceId}/generate": {
+      "put": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Generate code by template id and the given template variables",
+        "operationId": "generateCodeFromTemplate",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "ID of the template (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateRepositoryDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "_empty_",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Repository"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/{templateId}/members": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "List blueprint members",
+        "operationId": "listBlueprintMember",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "template identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuthorizationDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Update blueprint member",
+        "operationId": "updateBlueprintMember",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "template identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Create blueprint member",
+        "operationId": "createBlueprintMember",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "template identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "List alert policies",
+        "operationId": "listAlertPolicies",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MpmAlertPolicyDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Update an alert policy",
+        "operationId": "updateAlertPolicy",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MpmAlertPolicyDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MpmAlertPolicyDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Create an alert policy",
+        "operationId": "createAlertPolicy",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MpmAlertPolicyDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MpmAlertPolicyDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/domain/v1/domains/{domainId}/members": {
+      "get": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "List domain members",
+        "operationId": "listDomainMember",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuthorizationDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "Update domain member",
+        "operationId": "updateDomainMember",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "Create domain member",
+        "operationId": "createDomainMember",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/budget/v1/workspaces/{workspaceId}/budgets/{budgetId}": {
+      "get": {
+        "tags": [
+          "budget-controller"
+        ],
+        "description": "Retrieves a given budget within a workspace",
+        "operationId": "getBudget",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace from where to role will be queried",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "budgetId",
+            "in": "path",
+            "description": "ID of budget will be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return budget with the given id",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Budget not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "budget-controller"
+        ],
+        "description": "Update budget within a workspace",
+        "operationId": "editBudget",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace from where to role will be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "budgetId",
+            "in": "path",
+            "description": "ID of the budget being edited",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BudgetDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful budget edit",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Budget not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "budget-controller"
+        ],
+        "description": "Delete budget within a workspace",
+        "operationId": "deleteBudget",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace from where to role will be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "budgetId",
+            "in": "path",
+            "description": "ID of the budget to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Budget deletion was successful"
+          },
+          "404": {
+            "description": "Budget not found"
+          }
+        }
+      }
+    },
+    "/api/workspace/v1/workspaces/{workspaceId}/projects": {
+      "post": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Add project to workspace",
+        "operationId": "saveProjectForWorkspace",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of workspace will be edited",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Workspace"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Updated workspace",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspace/v1/workspaces/domains/{domainId}": {
+      "get": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Retrieves the list of workspaces within the organization",
+        "operationId": "getWorkspaces",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "ID of the domain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "showWithoutRepo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "showDeleted",
+            "in": "query",
+            "description": "Show deleted workspaces too",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of workspaces by organization",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Workspace"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Create workspace in organization",
+        "operationId": "createWorkspace",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "ID of the domain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Workspace"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created workspace",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Workspace name does not unique",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspace/v1/workspaces/domains/{domainId}/base-data": {
+      "post": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Create or update workspace with base data",
+        "operationId": "saveWorkspaceBaseData",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "ID of the domain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Workspace"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Created or updated workspace",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/v1/users/me/tour": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "description": "Retrieves the user tour definition",
+        "operationId": "getUserTour",
+        "responses": {
+          "200": {
+            "description": "User tour definition JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTourDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "description": "Updates the user tour definition",
+        "operationId": "setUserTour",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserTourDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Update tour definition JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTourDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/{templateId}/validate": {
+      "post": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Validate template variables",
+        "operationId": "validateVariables",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "ID of the template (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateRepositoryDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "20": {
+            "description": "_empty_"
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/search": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Get all templates for pagination",
+        "operationId": "getTemplateWithPaging_1",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "showGeneratable",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "categories",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "default": []
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Templates JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageTemplate"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Get all templates for pagination",
+        "operationId": "getTemplateWithPaging",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TemplateSearchDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Templates JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageTemplate"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/domains/{domainId}": {
+      "post": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Create new template",
+        "operationId": "createTemplate",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "ID of the domain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Create template body",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateBaseTemplateDto"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CreateCloneTemplateDto"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CreateEmptyTemplateDto"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Created template",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Template"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/task/v1/workspaces/{workspaceId}/tasks": {
+      "get": {
+        "tags": [
+          "task-controller"
+        ],
+        "description": "Gets tasks",
+        "operationId": "getTasks",
+        "parameters": [
+          {
+            "name": "taskType",
+            "in": "query",
+            "description": "Task type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PROVISIONING"
+              ]
+            }
+          },
+          {
+            "name": "taskStatus",
+            "in": "query",
+            "description": "Task status",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PENDING",
+                "ASSIGNED",
+                "REJECTED",
+                "DONE"
+              ]
+            }
+          },
+          {
+            "name": "showCompleted",
+            "in": "query",
+            "description": "Show completed",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Task workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task list JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "task-controller"
+        ],
+        "description": "Save or update task",
+        "operationId": "saveTasks",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Workspace id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Task"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Created or updated task",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/task/v1/workspaces/{workspaceId}/tasks/{taskId}/take": {
+      "post": {
+        "tags": [
+          "task-controller"
+        ],
+        "description": "Take task",
+        "operationId": "takeTask",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Workspace id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Take task",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/task/v1/workspaces/{workspaceId}/tasks/{taskId}/status/{taskStatus}": {
+      "post": {
+        "tags": [
+          "task-controller"
+        ],
+        "description": "Finish task",
+        "operationId": "finishTask",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Workspace id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskStatus",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PENDING",
+                "ASSIGNED",
+                "REJECTED",
+                "DONE"
+              ]
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Finish task",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/task/v1/workspaces/{workspaceId}/tasks/{taskId}/drop": {
+      "post": {
+        "tags": [
+          "task-controller"
+        ],
+        "description": "Drop task",
+        "operationId": "dropTask",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Workspace id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Drop task",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/provisioning/v1/workspaces/{workspaceId}/provisionings/{provisioningId}/finish": {
+      "post": {
+        "tags": [
+          "provisioning-controller"
+        ],
+        "description": "Finish",
+        "operationId": "finishProvisioning",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provisioningId",
+            "in": "path",
+            "description": "ID of GCP project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nothing"
+          }
+        }
+      }
+    },
+    "/api/provisioning/v1/workspaces/{workspaceId}/projects/{projectId}": {
+      "get": {
+        "tags": [
+          "provisioning-controller"
+        ],
+        "description": "Get Deploys",
+        "operationId": "getProvisions",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "ID of GCP project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deploy list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProvisionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "provisioning-controller"
+        ],
+        "description": "Deploy",
+        "operationId": "createProvision",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "ID of GCP project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nothing"
+          }
+        }
+      }
+    },
+    "/api/provisioning/v1/workspaces/{workspaceId}/projects/{projectId}/enable": {
+      "post": {
+        "tags": [
+          "provisioning-controller"
+        ],
+        "description": "Deploy",
+        "operationId": "enableProvision",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "ID of GCP project",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nothing",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/provisioning/v1/provisionings/finished": {
+      "post": {
+        "tags": [
+          "provisioning-controller"
+        ],
+        "description": "Provisioning finished",
+        "operationId": "provisioningFinished",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubSubMessageDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Empty body",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/project/v1/workspaces/{workspaceId}/projects/{projectId}/config": {
+      "post": {
+        "tags": [
+          "project-controller"
+        ],
+        "description": "Change the approval workflow settings of an project.",
+        "operationId": "changeConfiguration",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Gcp project id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Workspace id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectConfigurationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Config update was successful",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/project/v1/domains/{domainId}/projects/{projectId}/validate": {
+      "post": {
+        "tags": [
+          "project-controller"
+        ],
+        "description": "Retrieves GCP project if exists.",
+        "operationId": "validateProject",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Gcp project id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gcp project with the given project id.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/project/v1/domains/{domainId}/projects/{projectId}/create": {
+      "post": {
+        "tags": [
+          "project-controller"
+        ],
+        "description": "Creates GCP project if not exists.",
+        "operationId": "createProject",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Gcp project id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gcp project with the given project id.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/enable": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get MPM Enable Status",
+        "operationId": "getMPMEnableStatus",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MPM Enable Status",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMpmEnabledStatusDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Enable MPM",
+        "operationId": "enableMPM",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnableMpmDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "MPM Successfully enabled"
+          }
+        }
+      }
+    },
+    "/api/mlflow/v1/domains/{domainId}/versions/{version}/instances": {
+      "post": {
+        "tags": [
+          "mlflow-controller"
+        ],
+        "description": "Create a instance",
+        "operationId": "createMlflowInstance",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the template",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateManagedServiceDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Instance created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedInstanceDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Instance name not unique",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedInstanceDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mlflow/v1/domains/{domainId}/instances/{instanceId}/principals": {
+      "get": {
+        "tags": [
+          "mlflow-controller"
+        ],
+        "description": "Get principals",
+        "operationId": "listMlflowUsers",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizeManagedServiceDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "mlflow-controller"
+        ],
+        "description": "Grant access to principals",
+        "operationId": "addMlflowUsers",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizeManagedServiceUsersDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Access granted"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "mlflow-controller"
+        ],
+        "description": "Revoke access from principals",
+        "operationId": "removeMlflowUsers",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizeManagedServiceUsersDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Access revoked"
+          }
+        }
+      }
+    },
+    "/api/kubeflow/v1/domains/{domainId}/versions/{version}/instances": {
+      "post": {
+        "tags": [
+          "kubeflow-controller"
+        ],
+        "description": "Create a instance",
+        "operationId": "createKubeflowInstance",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the template",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateManagedServiceDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Instance created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedInstanceDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Instance name not unique",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedInstanceDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/kubeflow/v1/domains/{domainId}/instances/{instanceId}/principals": {
+      "get": {
+        "tags": [
+          "kubeflow-controller"
+        ],
+        "description": "Get principals",
+        "operationId": "listKubeflowUsers",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizeManagedServiceDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "kubeflow-controller"
+        ],
+        "description": "Grant access to principals",
+        "operationId": "addKubeflowUsers",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizeManagedServiceUsersDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Access granted"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "kubeflow-controller"
+        ],
+        "description": "Revoke access from principals",
+        "operationId": "removeKubeflowUsers",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizeManagedServiceUsersDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Access revoked"
+          }
+        }
+      }
+    },
+    "/api/domain/v1/signup": {
+      "post": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "Signup for trial",
+        "operationId": "signup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Signup successful",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/domain/v1/domains": {
+      "get": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "List domains",
+        "operationId": "listDomains",
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DomainDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "Create a new domain",
+        "operationId": "createDomain",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DomainDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Domain created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Domain name not unique",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/budget/v1/workspaces/{workspaceId}/budgets": {
+      "get": {
+        "tags": [
+          "budget-controller"
+        ],
+        "description": "Retrieves the list of budgets within the workspace",
+        "operationId": "getBudgets",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace from where to role will be queried",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "showDeleted",
+            "in": "query",
+            "description": "Show deleted workspaces too",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of budgets by workspace id",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BudgetDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "budget-controller"
+        ],
+        "description": "Create budget within a workspace",
+        "operationId": "createBudget",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace from where to role will be created",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BudgetDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Budget name not unique",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Budget created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workspace/v1/workspaces/{workspaceId}/members/{authorizationId}": {
+      "get": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Get workspace member",
+        "operationId": "getWorkspaceMember",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "workspace identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorizationId",
+            "in": "path",
+            "description": "Authorization identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful load",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "workspace-controller"
+        ],
+        "description": "Delete workspace member",
+        "operationId": "deleteWorkspaceMember",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "workspace identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorizationId",
+            "in": "path",
+            "description": "Authorization identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful delete"
+          }
+        }
+      }
+    },
+    "/api/user/v1/users/me": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "description": "Retrieves the definition of the current user",
+        "operationId": "getCurrentUser",
+        "responses": {
+          "200": {
+            "description": "User definition JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/v1/users/domains/{domainId}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "description": "Retrieves the list of users within the domain",
+        "operationId": "getAllUsers",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "ID of the domain",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of users",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "No GSuite domain administrative access information found.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No domain was specified or could be derived.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Get all templates",
+        "operationId": "getAllTemplates",
+        "responses": {
+          "200": {
+            "description": "Templates JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Template"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/{templateId}/workspaces": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Gets workspaces by template",
+        "operationId": "getWorkspacesByTemplate",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "ID of the template (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspace list JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkspaceBase"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/{templateId}/version/{version}/workspaces/{workspaceId}/variables/actual": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Gets actual template variables",
+        "operationId": "getTemplateVariablesActual",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "ID of the template (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the template",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template variables JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTemplateVariablesDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/{templateId}/version/{version}/variables": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Gets template variables",
+        "operationId": "getTemplateVariables",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "ID of the template (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the template",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template variables JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTemplateVariablesDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/{templateId}/members/{authorizationId}": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Get blueprint member",
+        "operationId": "getBlueprintMember",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "template identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorizationId",
+            "in": "path",
+            "description": "Authorization identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful load",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Delete blueprint member",
+        "operationId": "deleteBlueprintMember",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "template identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorizationId",
+            "in": "path",
+            "description": "Authorization identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful delete"
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/terraformVersions": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Get all terraform versions for templates",
+        "operationId": "getTerraformVersions",
+        "responses": {
+          "200": {
+            "description": "Templates TerraformVersion",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "v013",
+                      "v109"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/categories": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Get all template categories",
+        "operationId": "getTemplateCategories",
+        "responses": {
+          "200": {
+            "description": "Templates JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TemplateCategory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/template/v1/templates/baseVariables": {
+      "get": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Gets base template variables",
+        "operationId": "getBaseTemplateVariables",
+        "responses": {
+          "200": {
+            "description": "Template base variables JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTemplateVariablesDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/task/v1/workspaces/{workspaceId}/references/{referenceId}": {
+      "get": {
+        "tags": [
+          "task-controller"
+        ],
+        "description": "Get task by reference id",
+        "operationId": "getTaskByReferenceId",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Workspace id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "referenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get task by reference id",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/task/v1/types": {
+      "get": {
+        "tags": [
+          "task-controller"
+        ],
+        "description": "Gets task type list",
+        "operationId": "getTaskTypes",
+        "responses": {
+          "200": {
+            "description": "Task type list JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/serving/v1/domains/{domainId}/pipelines/{pipelineId}/models": {
+      "get": {
+        "tags": [
+          "serving-controller"
+        ],
+        "description": "List models",
+        "operationId": "listModels",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "description": "Pipeline identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServingModelDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/role/v1/roles/{resourceType}": {
+      "get": {
+        "tags": [
+          "role-controller"
+        ],
+        "description": "List roles",
+        "operationId": "listRoles",
+        "parameters": [
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource Type ",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AIP",
+                "DOMAIN",
+                "WORKSPACE",
+                "BLUEPRINT"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoleDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/role/v1/roles/update": {
+      "get": {
+        "tags": [
+          "role-controller"
+        ],
+        "description": "Update roles",
+        "operationId": "updateRoles",
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/resource/v1/resources": {
+      "get": {
+        "tags": [
+          "resource-controller"
+        ],
+        "description": "List resources",
+        "operationId": "listResources",
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/resource/v1/resources/{workspaceId}/type/WORKSPACE": {
+      "get": {
+        "tags": [
+          "resource-controller"
+        ],
+        "description": "Get workspace resource",
+        "operationId": "getWorkspaceResource",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of workspace will be queried",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/repository/v1/repositories/{workspaceId}": {
+      "get": {
+        "tags": [
+          "repository-controller"
+        ],
+        "description": "Gets repository for workspace",
+        "operationId": "getRepository",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of workspace (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Repository JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Repository"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/report/v1/workspaces/{workspaceId}/spendings": {
+      "get": {
+        "tags": [
+          "report-controller"
+        ],
+        "description": "Retrieves a list of daily spendings for a given workspace, all budgets aggregated",
+        "operationId": "getDailySpendings",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace from where to query the spendings",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Date from (inclusive)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "until",
+            "in": "query",
+            "description": "Date until (exclusive)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of workspace spendings",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/report/v1/workspaces/{workspaceId}/budgets/{budgetId}/cost": {
+      "get": {
+        "tags": [
+          "report-controller"
+        ],
+        "description": "Retrieves a list of daily spendings for a given budget",
+        "operationId": "getCumulativeDailySpendings",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace from where to query the spendings",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "budgetId",
+            "in": "path",
+            "description": "ID of the budget from where to query the spendings",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Date from (inclusive)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "until",
+            "in": "query",
+            "description": "Date until (exclusive)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of budget spendings",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/provisioning/v1/workspaces/{workspaceId}/provisionings/{provisioningId}/details": {
+      "get": {
+        "tags": [
+          "provisioning-controller"
+        ],
+        "description": "Get details of an provisioning",
+        "operationId": "getDetails",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provisioningId",
+            "in": "path",
+            "description": "ID of Provision",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of an provisioning",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProvisioningDetailDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/project/v1/domains/{domainId}": {
+      "get": {
+        "tags": [
+          "project-controller"
+        ],
+        "description": "Retrieves all available GCP projects.",
+        "operationId": "getAllProjects",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyUnallocated",
+            "in": "query",
+            "description": "Show only projects not allocated to workspaces",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gcp project with the given project id.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "List models",
+        "operationId": "listModels_1",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModelDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictions": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get model predictions count",
+        "operationId": "overviewPredictions",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionsCountDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictionsSum": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get predictions sum",
+        "operationId": "predictionSum",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionsSumDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictionsMean": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get predictions mean",
+        "operationId": "predictionMean",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionMeansDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictedVsActual": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get predicted vs actual",
+        "operationId": "predictedVsActual",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictedVsActualDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get plot type",
+        "operationId": "getPlotType",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plot type associated with modelId and managedServiceId",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMpmPlotTypes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes/{plotType}/dates": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get date and reference dates",
+        "operationId": "getDates",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "plotType",
+            "in": "path",
+            "description": "PlotType identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ROC_CURVE",
+                "PRECISION_RECALL_CURVE",
+                "KOLMOGOROV_SMIRNOV_PLOT",
+                "LIFT_PLOT",
+                "LIFT_TABLE"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dates and reference dates associated with modelId and managedServiceId",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMpmDates"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes/{plotType}/dates/{date}": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get Plot type data",
+        "operationId": "getPlotTypeData",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "plotType",
+            "in": "path",
+            "description": "PlotType identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ROC_CURVE",
+                "PRECISION_RECALL_CURVE",
+                "KOLMOGOROV_SMIRNOV_PLOT",
+                "LIFT_PLOT",
+                "LIFT_TABLE"
+              ]
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "Date identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plot type data",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MpmPlotDataDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/metadata": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get model metadata",
+        "operationId": "overviewMetadata",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelMetadataDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/mainmetric/{mainMetric}": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get model main metric",
+        "operationId": "overviewMainMetric",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mainMetric",
+            "in": "path",
+            "description": "Evaluation metric",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MSE"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MainMetricDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies/{alertPolicyId}": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get an alert policy",
+        "operationId": "getAlertPolicy",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "alertPolicyId",
+            "in": "path",
+            "description": "Alert policy identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MpmAlertPolicyDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Delete an alert policy",
+        "operationId": "deleteAlertPolicy",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "alertPolicyId",
+            "in": "path",
+            "description": "Alert policy identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful delete"
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertIncidents": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "List alert incidents",
+        "operationId": "listAlertIncidents",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MpmAlertIncidentDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertIncidents/{alertIncidentId}": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get an alert incident",
+        "operationId": "getAlertIncident",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "alertIncidentId",
+            "in": "path",
+            "description": "Alert incident identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MpmAlertIncidentDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mlflow/v1/versions": {
+      "get": {
+        "tags": [
+          "mlflow-controller"
+        ],
+        "summary": "Get versions",
+        "operationId": "getVersions",
+        "responses": {
+          "200": {
+            "description": "Get mlflow template versions",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TemplateVersion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mlflow/v1/domains/{domainId}/versions/{version}/variables": {
+      "get": {
+        "tags": [
+          "mlflow-controller"
+        ],
+        "summary": "Get instance variables",
+        "operationId": "getMlflowVariables",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the template",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template variables JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CookieCutterContent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mlflow/v1/domains/{domainId}/instances": {
+      "get": {
+        "tags": [
+          "mlflow-controller"
+        ],
+        "description": "List instances",
+        "operationId": "listMlflowInstances",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DEPLOY_PENDING",
+                "DEPLOY_SUCCESS",
+                "DEPLOY_ERROR",
+                "DESTROY_PENDING",
+                "DESTROY_ERROR"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ManagedInstanceDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mlflow/v1/domains/{domainId}/instances/{instanceId}": {
+      "get": {
+        "tags": [
+          "mlflow-controller"
+        ],
+        "description": "Get instance",
+        "operationId": "getMlflowInstance",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedInstanceDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "mlflow-controller"
+        ],
+        "description": "Delete instance",
+        "operationId": "deleteMlflowInstance",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful delete"
+          }
+        }
+      }
+    },
+    "/api/kubeflow/v1/versions": {
+      "get": {
+        "tags": [
+          "kubeflow-controller"
+        ],
+        "summary": "Get versions",
+        "operationId": "getVersions_1",
+        "responses": {
+          "200": {
+            "description": "Get kubeflow template versions",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TemplateVersion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/kubeflow/v1/domains/{domainId}/versions/{version}/variables": {
+      "get": {
+        "tags": [
+          "kubeflow-controller"
+        ],
+        "summary": "Get instance variables",
+        "operationId": "getKubeflowVariables",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the template",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template variables JSON",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CookieCutterContent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/kubeflow/v1/domains/{domainId}/instances": {
+      "get": {
+        "tags": [
+          "kubeflow-controller"
+        ],
+        "description": "List instances",
+        "operationId": "listKubeflowInstances",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DEPLOY_PENDING",
+                "DEPLOY_SUCCESS",
+                "DEPLOY_ERROR",
+                "DESTROY_PENDING",
+                "DESTROY_ERROR"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ManagedInstanceDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/kubeflow/v1/domains/{domainId}/instances/{instanceId}": {
+      "get": {
+        "tags": [
+          "kubeflow-controller"
+        ],
+        "description": "Get instance",
+        "operationId": "getKubeflowInstance",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedInstanceDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "kubeflow-controller"
+        ],
+        "description": "Delete instance",
+        "operationId": "deleteKubeflowInstance",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Instance id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful delete"
+          }
+        }
+      }
+    },
+    "/api/domain/v1/domains/{domainId}": {
+      "get": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "Get domain",
+        "operationId": "getDomain",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/domain/v1/domains/{domainId}/project-prefix": {
+      "get": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "Get domain project prefix",
+        "operationId": "getDomainProjectPrefix",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectPrefixDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/domain/v1/domains/{domainId}/members/{authorizationId}": {
+      "get": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "Get domain member",
+        "operationId": "getDomainMember",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorizationId",
+            "in": "path",
+            "description": "Authorization identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful load",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "domain-controller"
+        ],
+        "description": "Delete domain member",
+        "operationId": "deleteDomainMember",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorizationId",
+            "in": "path",
+            "description": "Authorization identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful delete"
+          }
+        }
+      }
+    },
+    "/api/budget/v1/workspaces/{workspaceId}/alerts": {
+      "get": {
+        "tags": [
+          "budget-controller"
+        ],
+        "description": "Retrieves a list of budget alerts for a given workspace",
+        "operationId": "getBudgetAlertsForWorkspace",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "ID of the workspace from where to role will be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "description": "Paging properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of budget alerts",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageBudgetAlertDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/budget/v1/domains/{domainId}/alerts": {
+      "get": {
+        "tags": [
+          "budget-controller"
+        ],
+        "description": "Retrieves a list of unfiltered budget alerts",
+        "operationId": "getBudgetAlerts",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "ID of the workspace from where to role will be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "description": "Paging properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of budget alerts",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageBudgetAlertDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApprovalWorkflowStatusDto": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AuthorizationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "principalType": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "SERVICE_ACCOUNT",
+              "GROUP",
+              "DOMAIN"
+            ]
+          },
+          "principalId": {
+            "type": "string"
+          },
+          "roles": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleDto"
+            }
+          }
+        },
+        "description": "Authorization"
+      },
+      "AuthorizeManagedServiceDto": {
+        "type": "object",
+        "properties": {
+          "principals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManagedServiceUserDto"
+            }
+          }
+        }
+      },
+      "AuthorizeManagedServiceUsersDto": {
+        "type": "object",
+        "properties": {
+          "principal": {
+            "type": "string"
+          }
+        },
+        "description": "Users"
+      },
+      "BudgetAlertDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "workspaceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "budgetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "budgetName": {
+            "type": "string"
+          },
+          "notificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "alertThresholdPercent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alertThresholdValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "notificationType": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "WEBHOOK",
+              "HARD_LIMIT"
+            ]
+          },
+          "triggerActionSuccessful": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BudgetDto": {
+        "required": [
+          "budgetLimit",
+          "name",
+          "notifications",
+          "projectDtos"
+        ],
+        "type": "object",
+        "properties": {
+          "budgetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "MONTHLY"
+            ]
+          },
+          "budgetLimit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NotificationDto"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "projectDtos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectDto"
+            }
+          },
+          "deleted": {
+            "type": "boolean"
+          }
+        },
+        "description": "Budget definition JSON"
+      },
+      "BuildDto": {
+        "type": "object",
+        "properties": {
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StepDto"
+            }
+          }
+        }
+      },
+      "CloudBuildDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          }
+        }
+      },
+      "CookieCutterArrayItem": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CookieCutterItem"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CookieCutterChoiceItem": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CookieCutterItem"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CookieCutterContent": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CookieCutterItem"
+            }
+          },
+          "originalContent": {
+            "type": "string"
+          }
+        }
+      },
+      "CookieCutterItem": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "object"
+          },
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "constraint": {
+            "$ref": "#/components/schemas/CookieCutterItemConstraint"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ARRAY",
+              "CHOICE",
+              "OBJECT",
+              "STRING"
+            ]
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "STRING": "CookieCutterTextItem",
+            "ARRAY": "CookieCutterArrayItem",
+            "OBJECT": "CookieCutterObjectItem",
+            "CHOICE": "CookieCutterChoiceItem"
+          }
+        }
+      },
+      "CookieCutterItemConstraint": {
+        "type": "object",
+        "properties": {
+          "required": {
+            "type": "boolean"
+          },
+          "pattern": {
+            "type": "string"
+          }
+        }
+      },
+      "CookieCutterObjectItem": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CookieCutterItem"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CookieCutterTextItem": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CookieCutterItem"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "CreateBaseTemplateDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTemplateDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "cookieCutterContent": {
+                "$ref": "#/components/schemas/CookieCutterContent"
+              }
+            }
+          }
+        ]
+      },
+      "CreateCloneTemplateDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTemplateDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "cloneTemplateId": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        ]
+      },
+      "CreateEmptyTemplateDto": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateTemplateDto"
+          }
+        ]
+      },
+      "CreateManagedServiceDto": {
+        "type": "object",
+        "properties": {
+          "cookieCutterContent": {
+            "$ref": "#/components/schemas/CookieCutterContent"
+          }
+        },
+        "description": "Managed instance definition JSON"
+      },
+      "CreateTemplateDto": {
+        "type": "object",
+        "properties": {
+          "createTemplateMode": {
+            "type": "string",
+            "enum": [
+              "EMPTY_BLUEPRINT",
+              "BASE_BLUEPRINT",
+              "CLONE_BLUEPRINT"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "cookiecutterConfigPath": {
+            "type": "string"
+          },
+          "terraformScriptDirectory": {
+            "type": "string"
+          },
+          "terraformEnvDirectory": {
+            "type": "string"
+          },
+          "version": {
+            "$ref": "#/components/schemas/TemplateVersion"
+          },
+          "repositoryName": {
+            "type": "string"
+          },
+          "newRepository": {
+            "type": "boolean"
+          },
+          "templateCategories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "provisionWithRetry": {
+            "type": "boolean"
+          }
+        },
+        "discriminator": {
+          "propertyName": "createTemplateMode"
+        }
+      },
+      "DeleteWorkspaceDto": {
+        "type": "object",
+        "properties": {
+          "projectToBeDeletedInGcp": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "removeGitRepository": {
+            "type": "boolean"
+          }
+        },
+        "description": "Details"
+      },
+      "DomainDto": {
+        "required": [
+          "billingAccountId",
+          "defaultProjectLimitAmount",
+          "defaultProjectLimitCurrency",
+          "domain",
+          "domainLimitAmount",
+          "domainLimitCurrency",
+          "folderId",
+          "gcpProjectPrefix",
+          "hideProvisioning",
+          "managedServiceProjectLimitAmount",
+          "repository",
+          "repositoryOrganizationName",
+          "serviceAccount"
+        ],
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string"
+          },
+          "serviceAccount": {
+            "type": "string"
+          },
+          "folderId": {
+            "type": "string"
+          },
+          "billingAccountId": {
+            "type": "string"
+          },
+          "repository": {
+            "$ref": "#/components/schemas/GitAuth"
+          },
+          "repositoryOrganizationName": {
+            "type": "string"
+          },
+          "gcpProjectPrefix": {
+            "type": "string"
+          },
+          "defaultProjectLimitAmount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "defaultProjectLimitCurrency": {
+            "type": "string"
+          },
+          "domainLimitAmount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "domainLimitCurrency": {
+            "type": "string"
+          },
+          "managedServiceProjectLimitAmount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "hideProvisioning": {
+            "type": "boolean"
+          }
+        },
+        "description": "Domain definition JSON"
+      },
+      "EnableMpmDto": {
+        "type": "object",
+        "properties": {
+          "mpmGcpProjectId": {
+            "type": "string"
+          },
+          "createMpmGcpProjectBqResources": {
+            "type": "boolean"
+          }
+        },
+        "description": "Managed instance definition JSON"
+      },
+      "GenerateRepositoryDto": {
+        "type": "object",
+        "properties": {
+          "cookieCutterContent": {
+            "$ref": "#/components/schemas/CookieCutterContent"
+          },
+          "managedServiceDependencies": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "blueprintDependencies": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "templateVersionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "repositoryName": {
+            "type": "string"
+          },
+          "newRepository": {
+            "type": "boolean"
+          }
+        },
+        "description": "Template variables"
+      },
+      "GetMpmDates": {
+        "type": "object",
+        "properties": {
+          "dates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      },
+      "GetMpmEnabledStatusDto": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GetMpmPlotTypes": {
+        "type": "object",
+        "properties": {
+          "plotTypes": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ROC_CURVE",
+                "PRECISION_RECALL_CURVE",
+                "KOLMOGOROV_SMIRNOV_PLOT",
+                "LIFT_PLOT",
+                "LIFT_TABLE"
+              ]
+            }
+          }
+        }
+      },
+      "GetTemplateVariablesDto": {
+        "type": "object",
+        "properties": {
+          "cookieCutterContent": {
+            "$ref": "#/components/schemas/CookieCutterContent"
+          },
+          "managedServiceDependencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "MLFLOW",
+                "KUBEFLOW"
+              ]
+            }
+          },
+          "blueprintDependencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TemplateBase"
+            }
+          }
+        }
+      },
+      "GitAuth": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "GitSettingsDto": {
+        "type": "object",
+        "properties": {
+          "provisioningBranch": {
+            "type": "string"
+          }
+        }
+      },
+      "MainMetricDto": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string"
+          },
+          "mainMetric": {
+            "type": "string",
+            "enum": [
+              "MSE"
+            ]
+          },
+          "currentValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "change": {
+            "type": "number",
+            "format": "double"
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          }
+        }
+      },
+      "ManagedInstanceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "MLFLOW",
+              "KUBEFLOW"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "DEPLOY_PENDING",
+              "DEPLOY_SUCCESS",
+              "DEPLOY_ERROR",
+              "DESTROY_PENDING",
+              "DESTROY_ERROR"
+            ]
+          }
+        }
+      },
+      "ManagedServiceUserDto": {
+        "type": "object",
+        "properties": {
+          "principal": {
+            "type": "string"
+          },
+          "userType": {
+            "type": "string"
+          }
+        }
+      },
+      "MessageDto": {
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "publishTime": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        }
+      },
+      "MetricValueDto": {
+        "type": "object",
+        "properties": {
+          "yvalue": {
+            "type": "number",
+            "format": "double"
+          },
+          "xvalue": {
+            "type": "string"
+          }
+        }
+      },
+      "ModelDto": {
+        "type": "object",
+        "properties": {
+          "unifiedModelId": {
+            "type": "string"
+          },
+          "modelName": {
+            "type": "string"
+          }
+        }
+      },
+      "ModelMetadataDto": {
+        "type": "object",
+        "properties": {
+          "unifiedModelId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "creator": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "REGRESSION",
+              "CLASSIFICATION"
+            ]
+          },
+          "evaluationMetric": {
+            "type": "string",
+            "enum": [
+              "MSE"
+            ]
+          },
+          "modelPeriodicity": {
+            "type": "string",
+            "enum": [
+              "DAY",
+              "WEEK",
+              "MONTH"
+            ]
+          },
+          "modelRegistryLink": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string"
+          },
+          "apiLink": {
+            "type": "string"
+          }
+        }
+      },
+      "MpmAlertIncidentDto": {
+        "type": "object",
+        "properties": {
+          "mpmAlertIncidentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "mpmAlertPolicy": {
+            "$ref": "#/components/schemas/MpmAlertPolicyDto"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "resolvedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actualValue": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "RESOLVED"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH"
+            ]
+          }
+        }
+      },
+      "MpmAlertPolicyDto": {
+        "required": [
+          "comparison",
+          "duration",
+          "metricType",
+          "policyName",
+          "threshold"
+        ],
+        "type": "object",
+        "properties": {
+          "mpmAlertPolicyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "policyName": {
+            "type": "string"
+          },
+          "metricType": {
+            "type": "string",
+            "enum": [
+              "FEATURE_DRIFT"
+            ]
+          },
+          "threshold": {
+            "type": "number",
+            "format": "float"
+          },
+          "comparison": {
+            "type": "string",
+            "enum": [
+              "COMPARISON_GT",
+              "COMPARISON_GE",
+              "COMPARISON_LT",
+              "COMPARISON_LE",
+              "COMPARISON_EQ",
+              "COMPARISON_NE"
+            ]
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MpmPlotDataDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      },
+      "NotificationDto": {
+        "type": "object",
+        "properties": {
+          "notificationType": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "WEBHOOK",
+              "HARD_LIMIT"
+            ]
+          },
+          "percent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "url": {
+            "type": "string"
+          },
+          "gcpProjects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectDto"
+            }
+          },
+          "lastAlert": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PageBudgetAlertDto": {
+        "type": "object",
+        "properties": {
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BudgetAlertDto"
+            }
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PageTemplate": {
+        "type": "object",
+        "properties": {
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Template"
+            }
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Pageable": {
+        "type": "object",
+        "properties": {
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paged": {
+            "type": "boolean"
+          },
+          "unpaged": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PredictedVsActualDto": {
+        "type": "object",
+        "properties": {
+          "pred": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          },
+          "actual": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          }
+        }
+      },
+      "PredictionMeansDto": {
+        "type": "object",
+        "properties": {
+          "pred": {
+            "$ref": "#/components/schemas/PredictionsMeanTypeDto"
+          },
+          "actual": {
+            "$ref": "#/components/schemas/PredictionsMeanTypeDto"
+          }
+        }
+      },
+      "PredictionsCountDto": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string"
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          }
+        }
+      },
+      "PredictionsMeanTypeDto": {
+        "type": "object",
+        "properties": {
+          "q25": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          },
+          "median": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          },
+          "q75": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          },
+          "avg": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          }
+        }
+      },
+      "PredictionsSumDto": {
+        "type": "object",
+        "properties": {
+          "predSum": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          },
+          "actualSum": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          },
+          "diff": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValueDto"
+            }
+          }
+        }
+      },
+      "ProjectConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "approvalWorkflowStatus": {
+            "$ref": "#/components/schemas/ApprovalWorkflowStatusDto"
+          },
+          "gitSettings": {
+            "$ref": "#/components/schemas/GitSettingsDto"
+          }
+        }
+      },
+      "ProjectDto": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string"
+          },
+          "projectNumber": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string"
+          },
+          "environmentType": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "TEST",
+              "DEVELOP",
+              "PRODUCTION",
+              "STAGING",
+              "UAT"
+            ]
+          },
+          "provisioningEnabled": {
+            "type": "boolean"
+          },
+          "approvalWorkflowEnabled": {
+            "type": "boolean"
+          },
+          "approvers": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "provisioningBranch": {
+            "type": "string"
+          },
+          "cloudBuildServiceAccountEmail": {
+            "type": "string"
+          }
+        }
+      },
+      "ProjectPrefixDto": {
+        "type": "object",
+        "properties": {
+          "projectPrefix": {
+            "type": "string"
+          }
+        }
+      },
+      "ProvisionDto": {
+        "type": "object",
+        "properties": {
+          "provisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "commitId": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "terraformCommitId": {
+            "type": "string"
+          },
+          "terraformBranch": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "RUNNING",
+              "FINISHED",
+              "WAITING_FOR_APPROVAL",
+              "REJECTED",
+              "ERROR"
+            ]
+          }
+        }
+      },
+      "ProvisioningDetailDto": {
+        "type": "object",
+        "properties": {
+          "provisioning": {
+            "$ref": "#/components/schemas/ProvisionDto"
+          },
+          "commitId": {
+            "type": "string"
+          },
+          "provisionType": {
+            "type": "string",
+            "enum": [
+              "AUTO",
+              "MANUAL"
+            ]
+          },
+          "builds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BuildDto"
+            }
+          },
+          "outputs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PubSubMessageDto": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "$ref": "#/components/schemas/MessageDto"
+          },
+          "subscription": {
+            "type": "string"
+          },
+          "cloudBuildDto": {
+            "$ref": "#/components/schemas/CloudBuildDto"
+          }
+        },
+        "description": "Pubsub message JSON"
+      },
+      "Repository": {
+        "type": "object",
+        "properties": {
+          "templateVersion": {
+            "$ref": "#/components/schemas/TemplateVersion"
+          },
+          "pullRequestUrl": {
+            "type": "string",
+            "description": "Pull request url"
+          },
+          "repositoryUrl": {
+            "type": "string",
+            "description": "Generated repository url"
+          },
+          "template": {
+            "$ref": "#/components/schemas/Template"
+          },
+          "cookieCutterVariables": {
+            "$ref": "#/components/schemas/CookieCutterContent"
+          }
+        },
+        "description": "A repository definition"
+      },
+      "Repository detail": {
+        "type": "object",
+        "properties": {
+          "templateVersion": {
+            "$ref": "#/components/schemas/TemplateVersion"
+          },
+          "pullRequestUrl": {
+            "type": "string",
+            "description": "Pull request url"
+          },
+          "repositoryUrl": {
+            "type": "string",
+            "description": "Generated repository url"
+          },
+          "template": {
+            "$ref": "#/components/schemas/Template"
+          },
+          "cookieCutterVariables": {
+            "$ref": "#/components/schemas/CookieCutterContent"
+          },
+          "Workspace": {
+            "$ref": "#/components/schemas/Workspace"
+          }
+        },
+        "description": "A repository detail"
+      },
+      "ResourceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "domainId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "FOLDER",
+              "WORKSPACE"
+            ]
+          }
+        }
+      },
+      "RoleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "resourceType": {
+            "type": "string",
+            "enum": [
+              "AIP",
+              "DOMAIN",
+              "WORKSPACE",
+              "BLUEPRINT"
+            ]
+          }
+        }
+      },
+      "ServingModelDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "apiUrl": {
+            "type": "string"
+          },
+          "modelRegistryUrl": {
+            "type": "string"
+          },
+          "infrastructure": {
+            "type": "string",
+            "enum": [
+              "AIP",
+              "VERTEX_AI"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "READY",
+              "FAILED"
+            ]
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServingModelVersionDto"
+            }
+          }
+        }
+      },
+      "ServingModelVersionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "apiUrl": {
+            "type": "string"
+          },
+          "modelRegistryUrl": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "READY",
+              "FAILED"
+            ]
+          }
+        }
+      },
+      "SignupDto": {
+        "required": [
+          "companyName",
+          "githubUser",
+          "name",
+          "phone",
+          "reasonOfTrial"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "githubUser": {
+            "type": "string"
+          },
+          "reasonOfTrial": {
+            "type": "string"
+          }
+        },
+        "description": "Signup definition"
+      },
+      "Sort": {
+        "type": "object",
+        "properties": {
+          "sorted": {
+            "type": "boolean"
+          },
+          "unsorted": {
+            "type": "boolean"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StepDto": {
+        "type": "object",
+        "properties": {
+          "buildStepId": {
+            "type": "string"
+          },
+          "logs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Task": {
+        "required": [
+          "assignedUsers",
+          "taskStatus",
+          "taskType"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Task ID.",
+            "format": "uuid"
+          },
+          "taskType": {
+            "type": "string",
+            "description": "Task type.",
+            "enum": [
+              "PROVISIONING"
+            ]
+          },
+          "taskName": {
+            "type": "string",
+            "description": "Task name."
+          },
+          "description": {
+            "type": "string",
+            "description": "Task description."
+          },
+          "isTakenByMe": {
+            "type": "boolean",
+            "description": "Task is taken by me."
+          },
+          "assignable": {
+            "type": "boolean",
+            "description": "Task is assignable."
+          },
+          "taskStatus": {
+            "type": "string",
+            "description": "Task status.",
+            "enum": [
+              "PENDING",
+              "ASSIGNED",
+              "REJECTED",
+              "DONE"
+            ]
+          },
+          "workspace": {
+            "$ref": "#/components/schemas/Workspace"
+          },
+          "metaData": {
+            "type": "string",
+            "description": "Task metadata."
+          },
+          "assignedUsers": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "Assigned users.",
+            "items": {
+              "type": "string",
+              "description": "Assigned users."
+            }
+          },
+          "referenceId": {
+            "type": "string",
+            "description": "Reference id."
+          },
+          "doneBy": {
+            "type": "string",
+            "description": "Is done by"
+          },
+          "createdById": {
+            "type": "string",
+            "description": "User ID of the one who created the task. Should not be set when creating the task."
+          },
+          "createdByName": {
+            "type": "string",
+            "description": "User name of the one who created the task. Should not be set when creating the task."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Date-time of the task creation. Should not be set when creating the task.",
+            "format": "date-time"
+          },
+          "lastModifiedById": {
+            "type": "string",
+            "description": "User ID of the one who edited the task for the last time. Should not be set when creating/editing the task."
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "description": "Date-time of the last task editing. Should not be set when creating/editing the task.",
+            "format": "date-time"
+          },
+          "done": {
+            "type": "boolean"
+          }
+        },
+        "description": "Task data for create or update"
+      },
+      "TaskType": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Task type.",
+            "enum": [
+              "PROVISIONING"
+            ]
+          },
+          "statusList": {
+            "type": "array",
+            "description": "Task type status.",
+            "items": {
+              "type": "string",
+              "description": "Task type status.",
+              "enum": [
+                "PENDING",
+                "ASSIGNED",
+                "REJECTED",
+                "DONE"
+              ]
+            }
+          }
+        },
+        "description": "A task type definition"
+      },
+      "Template": {
+        "required": [
+          "filePath",
+          "repositoryName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Template ID. Cannot be set when creating templates",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Template name."
+          },
+          "repositoryName": {
+            "type": "string",
+            "description": "Template repository name."
+          },
+          "filePath": {
+            "type": "string",
+            "description": "Template repository file path."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for the template."
+          },
+          "versions": {
+            "type": "array",
+            "description": "Versions.",
+            "items": {
+              "$ref": "#/components/schemas/TemplateVersion"
+            }
+          },
+          "image": {
+            "type": "string",
+            "description": "Image name."
+          },
+          "instanceCount": {
+            "type": "integer",
+            "description": "Number of deployed instances.",
+            "format": "int32"
+          },
+          "createdById": {
+            "type": "string",
+            "description": "User ID of the one who created the template. Should not be set when creating the template."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Date-time of the template creation. Should not be set when creating the template.",
+            "format": "date-time"
+          },
+          "lastModifiedById": {
+            "type": "string",
+            "description": "User ID of the one who edited the template for the last time. Should not be set when creating/editing the template."
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "description": "Date-time of the last template editing. Should not be set when creating/editing the template.",
+            "format": "date-time"
+          },
+          "providedByAliz": {
+            "type": "boolean",
+            "description": "Is it provided by Aliz or not."
+          },
+          "templateCategories": {
+            "type": "array",
+            "description": "The list of categories the template is in.",
+            "items": {
+              "$ref": "#/components/schemas/TemplateCategory"
+            }
+          }
+        },
+        "description": "A template definition"
+      },
+      "Template detail": {
+        "required": [
+          "filePath",
+          "repositoryName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Template ID. Cannot be set when creating templates",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Template name."
+          },
+          "repositoryName": {
+            "type": "string",
+            "description": "Template repository name."
+          },
+          "filePath": {
+            "type": "string",
+            "description": "Template repository file path."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for the template."
+          },
+          "versions": {
+            "type": "array",
+            "description": "Versions.",
+            "items": {
+              "$ref": "#/components/schemas/TemplateVersion"
+            }
+          },
+          "image": {
+            "type": "string",
+            "description": "Image name."
+          },
+          "instanceCount": {
+            "type": "integer",
+            "description": "Number of deployed instances.",
+            "format": "int32"
+          },
+          "createdById": {
+            "type": "string",
+            "description": "User ID of the one who created the template. Should not be set when creating the template."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Date-time of the template creation. Should not be set when creating the template.",
+            "format": "date-time"
+          },
+          "lastModifiedById": {
+            "type": "string",
+            "description": "User ID of the one who edited the template for the last time. Should not be set when creating/editing the template."
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "description": "Date-time of the last template editing. Should not be set when creating/editing the template.",
+            "format": "date-time"
+          },
+          "providedByAliz": {
+            "type": "boolean",
+            "description": "Is it provided by Aliz or not."
+          },
+          "templateCategories": {
+            "type": "array",
+            "description": "The list of categories the template is in.",
+            "items": {
+              "$ref": "#/components/schemas/TemplateCategory"
+            }
+          },
+          "repositories": {
+            "type": "array",
+            "description": "Repositories",
+            "items": {
+              "$ref": "#/components/schemas/Repository detail"
+            }
+          }
+        },
+        "description": "A template detail"
+      },
+      "TemplateBase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Template ID. Cannot be set when creating templates",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Template name."
+          }
+        },
+        "description": "A template definition"
+      },
+      "TemplateCategory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Template Category ID.",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Template category name."
+          }
+        },
+        "description": "A template category"
+      },
+      "TemplateSearchDto": {
+        "type": "object",
+        "properties": {
+          "expression": {
+            "type": "string"
+          },
+          "showGeneratable": {
+            "type": "boolean"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "TemplateVersion": {
+        "required": [
+          "branch",
+          "releaseDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Template Version ID.",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "string",
+            "description": "Template version."
+          },
+          "terraformVersion": {
+            "type": "string",
+            "description": "Terraform version.",
+            "enum": [
+              "v013",
+              "v109"
+            ]
+          },
+          "releaseDate": {
+            "type": "string",
+            "description": "Release date of this version.",
+            "format": "date-time"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch of this version"
+          }
+        },
+        "description": "A template version definition"
+      },
+      "UpdateTemplateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "terraformScriptDirectory": {
+            "type": "string"
+          },
+          "terraformEnvDirectory": {
+            "type": "string"
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TemplateVersion"
+            }
+          },
+          "templateCategories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "description": "Update template body"
+      },
+      "UpgradeRepositoryDto": {
+        "type": "object",
+        "properties": {
+          "cookieCutterContent": {
+            "$ref": "#/components/schemas/CookieCutterContent"
+          },
+          "managedServiceDependencies": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "blueprintDependencies": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "templateVersionId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "description": "Template variables"
+      },
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          }
+        }
+      },
+      "UserTourDto": {
+        "type": "object",
+        "properties": {
+          "showUserTour": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "Workspace": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "domainId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "FOLDER",
+              "WORKSPACE"
+            ]
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceDto"
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for the workspace."
+          },
+          "createdById": {
+            "type": "string",
+            "description": "User ID of the one who created the workspace. Should not be set when creating the workspace."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Date-time of the workspace creation. Should not be set when creating the workspace.",
+            "format": "date-time"
+          },
+          "lastModifiedById": {
+            "type": "string",
+            "description": "User ID of the one who edited the workspace for the last time. Should not be set when creating/editing the workspace."
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "description": "Date-time of the last workspace editing. Should not be set when creating/editing the workspace.",
+            "format": "date-time"
+          },
+          "projects": {
+            "type": "array",
+            "description": "GCP projects managed in this workspace.",
+            "items": {
+              "$ref": "#/components/schemas/ProjectDto"
+            }
+          },
+          "budgets": {
+            "type": "array",
+            "description": "Budgets associated with the workspace.",
+            "items": {
+              "$ref": "#/components/schemas/BudgetDto"
+            }
+          },
+          "deleted": {
+            "type": "boolean"
+          }
+        },
+        "description": "Workspace definition JSON"
+      },
+      "WorkspaceBase": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Workspace ID. Cannot be set when creating workspaces",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Workspace name. Must be globally unique."
+          }
+        },
+        "description": "A workspace definition"
+      }
+    },
+    "securitySchemes": {
+      "bearer-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    }
+  }
+}
