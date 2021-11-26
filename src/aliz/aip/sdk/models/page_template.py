@@ -28,8 +28,8 @@ class PageTemplate(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'total_elements': 'int',
         'total_pages': 'int',
+        'total_elements': 'int',
         'number': 'int',
         'sort': 'Sort',
         'size': 'int',
@@ -42,8 +42,8 @@ class PageTemplate(object):
     }
 
     attribute_map = {
-        'total_elements': 'totalElements',
         'total_pages': 'totalPages',
+        'total_elements': 'totalElements',
         'number': 'number',
         'sort': 'sort',
         'size': 'size',
@@ -55,10 +55,10 @@ class PageTemplate(object):
         'empty': 'empty'
     }
 
-    def __init__(self, total_elements=None, total_pages=None, number=None, sort=None, size=None, content=None, pageable=None, first=None, last=None, number_of_elements=None, empty=None):  # noqa: E501
+    def __init__(self, total_pages=None, total_elements=None, number=None, sort=None, size=None, content=None, pageable=None, first=None, last=None, number_of_elements=None, empty=None):  # noqa: E501
         """PageTemplate - a model defined in Swagger"""  # noqa: E501
-        self._total_elements = None
         self._total_pages = None
+        self._total_elements = None
         self._number = None
         self._sort = None
         self._size = None
@@ -69,10 +69,10 @@ class PageTemplate(object):
         self._number_of_elements = None
         self._empty = None
         self.discriminator = None
-        if total_elements is not None:
-            self.total_elements = total_elements
         if total_pages is not None:
             self.total_pages = total_pages
+        if total_elements is not None:
+            self.total_elements = total_elements
         if number is not None:
             self.number = number
         if sort is not None:
@@ -91,27 +91,6 @@ class PageTemplate(object):
             self.number_of_elements = number_of_elements
         if empty is not None:
             self.empty = empty
-
-    @property
-    def total_elements(self):
-        """Gets the total_elements of this PageTemplate.  # noqa: E501
-
-
-        :return: The total_elements of this PageTemplate.  # noqa: E501
-        :rtype: int
-        """
-        return self._total_elements
-
-    @total_elements.setter
-    def total_elements(self, total_elements):
-        """Sets the total_elements of this PageTemplate.
-
-
-        :param total_elements: The total_elements of this PageTemplate.  # noqa: E501
-        :type: int
-        """
-
-        self._total_elements = total_elements
 
     @property
     def total_pages(self):
@@ -133,6 +112,27 @@ class PageTemplate(object):
         """
 
         self._total_pages = total_pages
+
+    @property
+    def total_elements(self):
+        """Gets the total_elements of this PageTemplate.  # noqa: E501
+
+
+        :return: The total_elements of this PageTemplate.  # noqa: E501
+        :rtype: int
+        """
+        return self._total_elements
+
+    @total_elements.setter
+    def total_elements(self, total_elements):
+        """Sets the total_elements of this PageTemplate.
+
+
+        :param total_elements: The total_elements of this PageTemplate.  # noqa: E501
+        :type: int
+        """
+
+        self._total_elements = total_elements
 
     @property
     def number(self):

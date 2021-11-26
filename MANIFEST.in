@@ -1,0 +1,5 @@
+recursive-exclude __pycache__  *.pyc
+include *.py
+
+include .build-date
+include .git-hash
