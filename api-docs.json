@@ -5676,13 +5676,13 @@
       "PageBudgetAlertDto": {
         "type": "object",
         "properties": {
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
           "totalElements": {
             "type": "integer",
             "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
           },
           "number": {
             "type": "integer",
@@ -5722,13 +5722,13 @@
       "PageTemplate": {
         "type": "object",
         "properties": {
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
           "totalElements": {
             "type": "integer",
             "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
           },
           "number": {
             "type": "integer",
@@ -6444,6 +6444,12 @@
             "type": "boolean",
             "description": "Is it provided by Aliz or not."
           },
+          "terraformScriptDirectory": {
+            "type": "string"
+          },
+          "terraformEnvDirectory": {
+            "type": "string"
+          },
           "templateCategories": {
             "type": "array",
             "description": "The list of categories the template is in.",
@@ -6519,6 +6525,12 @@
           "providedByAliz": {
             "type": "boolean",
             "description": "Is it provided by Aliz or not."
+          },
+          "terraformScriptDirectory": {
+            "type": "string"
+          },
+          "terraformEnvDirectory": {
+            "type": "string"
           },
           "templateCategories": {
             "type": "array",

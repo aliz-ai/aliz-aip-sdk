@@ -41,6 +41,8 @@ class Template(object):
         'last_modified_by_id': 'str',
         'last_modified_at': 'datetime',
         'provided_by_aliz': 'bool',
+        'terraform_script_directory': 'str',
+        'terraform_env_directory': 'str',
         'template_categories': 'list[TemplateCategory]'
     }
 
@@ -58,10 +60,12 @@ class Template(object):
         'last_modified_by_id': 'lastModifiedById',
         'last_modified_at': 'lastModifiedAt',
         'provided_by_aliz': 'providedByAliz',
+        'terraform_script_directory': 'terraformScriptDirectory',
+        'terraform_env_directory': 'terraformEnvDirectory',
         'template_categories': 'templateCategories'
     }
 
-    def __init__(self, id=None, name=None, repository_name=None, file_path=None, description=None, versions=None, image=None, instance_count=None, created_by_id=None, created_at=None, last_modified_by_id=None, last_modified_at=None, provided_by_aliz=None, template_categories=None):  # noqa: E501
+    def __init__(self, id=None, name=None, repository_name=None, file_path=None, description=None, versions=None, image=None, instance_count=None, created_by_id=None, created_at=None, last_modified_by_id=None, last_modified_at=None, provided_by_aliz=None, terraform_script_directory=None, terraform_env_directory=None, template_categories=None):  # noqa: E501
         """Template - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self._name = None
@@ -76,6 +80,8 @@ class Template(object):
         self._last_modified_by_id = None
         self._last_modified_at = None
         self._provided_by_aliz = None
+        self._terraform_script_directory = None
+        self._terraform_env_directory = None
         self._template_categories = None
         self.discriminator = None
         if id is not None:
@@ -102,6 +108,10 @@ class Template(object):
             self.last_modified_at = last_modified_at
         if provided_by_aliz is not None:
             self.provided_by_aliz = provided_by_aliz
+        if terraform_script_directory is not None:
+            self.terraform_script_directory = terraform_script_directory
+        if terraform_env_directory is not None:
+            self.terraform_env_directory = terraform_env_directory
         if template_categories is not None:
             self.template_categories = template_categories
 
@@ -407,6 +417,48 @@ class Template(object):
         """
 
         self._provided_by_aliz = provided_by_aliz
+
+    @property
+    def terraform_script_directory(self):
+        """Gets the terraform_script_directory of this Template.  # noqa: E501
+
+
+        :return: The terraform_script_directory of this Template.  # noqa: E501
+        :rtype: str
+        """
+        return self._terraform_script_directory
+
+    @terraform_script_directory.setter
+    def terraform_script_directory(self, terraform_script_directory):
+        """Sets the terraform_script_directory of this Template.
+
+
+        :param terraform_script_directory: The terraform_script_directory of this Template.  # noqa: E501
+        :type: str
+        """
+
+        self._terraform_script_directory = terraform_script_directory
+
+    @property
+    def terraform_env_directory(self):
+        """Gets the terraform_env_directory of this Template.  # noqa: E501
+
+
+        :return: The terraform_env_directory of this Template.  # noqa: E501
+        :rtype: str
+        """
+        return self._terraform_env_directory
+
+    @terraform_env_directory.setter
+    def terraform_env_directory(self, terraform_env_directory):
+        """Sets the terraform_env_directory of this Template.
+
+
+        :param terraform_env_directory: The terraform_env_directory of this Template.  # noqa: E501
+        :type: str
+        """
+
+        self._terraform_env_directory = terraform_env_directory
 
     @property
     def template_categories(self):
