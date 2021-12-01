@@ -29,7 +29,7 @@ class CreateBaseTemplateDto(CreateTemplateDto):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'cookie_cutter_content': 'CookieCutterContent'
+        'cookie_cutter_content': 'dict(str, object)'
     }
     if hasattr(CreateTemplateDto, "swagger_types"):
         swagger_types.update(CreateTemplateDto.swagger_types)
@@ -54,7 +54,7 @@ class CreateBaseTemplateDto(CreateTemplateDto):
 
 
         :return: The cookie_cutter_content of this CreateBaseTemplateDto.  # noqa: E501
-        :rtype: CookieCutterContent
+        :rtype: dict(str, object)
         """
         return self._cookie_cutter_content
 
@@ -64,7 +64,7 @@ class CreateBaseTemplateDto(CreateTemplateDto):
 
 
         :param cookie_cutter_content: The cookie_cutter_content of this CreateBaseTemplateDto.  # noqa: E501
-        :type: CookieCutterContent
+        :type: dict(str, object)
         """
 
         self._cookie_cutter_content = cookie_cutter_content

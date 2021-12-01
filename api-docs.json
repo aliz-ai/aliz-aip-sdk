@@ -4983,7 +4983,8 @@
           "originalContent": {
             "type": "string"
           }
-        }
+        },
+        "description": "Template variables."
       },
       "CookieCutterItem": {
         "type": "object",
@@ -5079,7 +5080,10 @@
             "type": "object",
             "properties": {
               "cookieCutterContent": {
-                "$ref": "#/components/schemas/CookieCutterContent"
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
               }
             }
           }
@@ -5263,7 +5267,10 @@
         "type": "object",
         "properties": {
           "cookieCutterContent": {
-            "$ref": "#/components/schemas/CookieCutterContent"
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
           },
           "managedServiceDependencies": {
             "type": "object",
@@ -6649,7 +6656,10 @@
         "type": "object",
         "properties": {
           "cookieCutterContent": {
-            "$ref": "#/components/schemas/CookieCutterContent"
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
           },
           "managedServiceDependencies": {
             "type": "object",

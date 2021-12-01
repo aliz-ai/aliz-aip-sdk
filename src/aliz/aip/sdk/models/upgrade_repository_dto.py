@@ -28,7 +28,7 @@ class UpgradeRepositoryDto(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'cookie_cutter_content': 'CookieCutterContent',
+        'cookie_cutter_content': 'dict(str, object)',
         'managed_service_dependencies': 'dict(str, str)',
         'blueprint_dependencies': 'dict(str, str)',
         'template_version_id': 'str'
@@ -63,7 +63,7 @@ class UpgradeRepositoryDto(object):
 
 
         :return: The cookie_cutter_content of this UpgradeRepositoryDto.  # noqa: E501
-        :rtype: CookieCutterContent
+        :rtype: dict(str, object)
         """
         return self._cookie_cutter_content
 
@@ -73,7 +73,7 @@ class UpgradeRepositoryDto(object):
 
 
         :param cookie_cutter_content: The cookie_cutter_content of this UpgradeRepositoryDto.  # noqa: E501
-        :type: CookieCutterContent
+        :type: dict(str, object)
         """
 
         self._cookie_cutter_content = cookie_cutter_content
