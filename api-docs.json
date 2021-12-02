@@ -326,6 +326,30 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Delete template",
+        "operationId": "deleteTemplate",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "ID of the template (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted template"
+          }
+        }
       }
     },
     "/api/template/v1/templates/{templateId}/workspaces/{workspaceId}/upgrade": {
