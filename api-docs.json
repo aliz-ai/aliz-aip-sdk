@@ -571,6 +571,50 @@
         }
       }
     },
+    "/api/template/v1/templates/{templateId}/download": {
+      "put": {
+        "tags": [
+          "template-controller"
+        ],
+        "description": "Download code by template id and the given template variables",
+        "operationId": "downloadCodeFromTemplate",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "ID of the template (e.g. bed84f43-fefd-4461-a864-16367ea25dd9)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateDownloadRepositoryDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Generated contents as gz compressed tar",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies": {
       "get": {
         "tags": [
@@ -5287,6 +5331,51 @@
         },
         "description": "Managed instance definition JSON"
       },
+      "GenerateDownloadRepositoryDto": {
+        "type": "object",
+        "properties": {
+          "cookieCutterContent": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "managedServiceDependencies": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "blueprintDependencies": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "templateVersionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "repositoryName": {
+            "type": "string"
+          },
+          "newRepository": {
+            "type": "boolean"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "placeholderPrefix": {
+            "type": "string"
+          },
+          "placeholderSuffix": {
+            "type": "string"
+          }
+        },
+        "description": "Template variables"
+      },
       "GenerateRepositoryDto": {
         "type": "object",
         "properties": {
@@ -5700,13 +5789,13 @@
       "PageBudgetAlertDto": {
         "type": "object",
         "properties": {
-          "totalElements": {
-            "type": "integer",
-            "format": "int64"
-          },
           "totalPages": {
             "type": "integer",
             "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
           },
           "number": {
             "type": "integer",
@@ -5746,13 +5835,13 @@
       "PageTemplate": {
         "type": "object",
         "properties": {
-          "totalElements": {
-            "type": "integer",
-            "format": "int64"
-          },
           "totalPages": {
             "type": "integer",
             "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
           },
           "number": {
             "type": "integer",

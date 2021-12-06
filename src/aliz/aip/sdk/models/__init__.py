@@ -38,6 +38,7 @@ from aliz.aip.sdk.models.delete_workspace_dto import DeleteWorkspaceDto
 from aliz.aip.sdk.models.domain_dto import DomainDto
 from aliz.aip.sdk.models.domains_domain_id_body import DomainsDomainIdBody
 from aliz.aip.sdk.models.enable_mpm_dto import EnableMpmDto
+from aliz.aip.sdk.models.generate_download_repository_dto import GenerateDownloadRepositoryDto
 from aliz.aip.sdk.models.generate_repository_dto import GenerateRepositoryDto
 from aliz.aip.sdk.models.get_mpm_dates import GetMpmDates
 from aliz.aip.sdk.models.get_mpm_enabled_status_dto import GetMpmEnabledStatusDto
