@@ -21,7 +21,7 @@ jobs:
       - gcp-cli/initialize
       - run:
           name: Build Python package
-          command: python setup.py sdist bdist
+          command: python setup.py sdist
       - run:
           name: Create repository configuration
           command: |
