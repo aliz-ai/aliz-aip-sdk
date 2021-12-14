@@ -55,6 +55,7 @@ from aliz.aip.sdk.models.model_dto import ModelDto
 from aliz.aip.sdk.models.model_metadata_dto import ModelMetadataDto
 from aliz.aip.sdk.models.mpm_alert_incident_dto import MpmAlertIncidentDto
 from aliz.aip.sdk.models.mpm_alert_policy_dto import MpmAlertPolicyDto
+from aliz.aip.sdk.models.mpm_historical_plot_data_dto import MpmHistoricalPlotDataDto
 from aliz.aip.sdk.models.mpm_plot_data_dto import MpmPlotDataDto
 from aliz.aip.sdk.models.notification_dto import NotificationDto
 from aliz.aip.sdk.models.one_ofdomains_domain_id_body import OneOfdomainsDomainIdBody

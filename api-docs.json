@@ -3803,6 +3803,66 @@
         }
       }
     },
+    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes/{plotType}": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get historical plot type data",
+        "operationId": "getHistoricalPlotTypeData",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unifiedModelId",
+            "in": "path",
+            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "plotType",
+            "in": "path",
+            "description": "PlotType identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ROC_CURVE",
+                "PRECISION_RECALL_CURVE",
+                "KOLMOGOROV_SMIRNOV_PLOT",
+                "LIFT_PLOT",
+                "LIFT_TABLE"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Historical plot type data",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MpmHistoricalPlotDataDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes/{plotType}/dates": {
       "get": {
         "tags": [
@@ -3865,7 +3925,7 @@
         "tags": [
           "mpm-controller"
         ],
-        "description": "Get Plot type data",
+        "description": "Get plot type data",
         "operationId": "getPlotTypeData",
         "parameters": [
           {
@@ -5741,6 +5801,27 @@
           "duration": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "MpmHistoricalPlotDataDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "plotDataItems": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "classNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
