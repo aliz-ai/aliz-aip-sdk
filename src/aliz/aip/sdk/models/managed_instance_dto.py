@@ -143,7 +143,7 @@ class ManagedInstanceDto(object):
         :param type: The type of this ManagedInstanceDto.  # noqa: E501
         :type: str
         """
-        allowed_values = ["MLFLOW", "KUBEFLOW"]  # noqa: E501
+        allowed_values = ["MLFLOW", "KUBEFLOW", "MPM"]  # noqa: E501
         if type not in allowed_values:
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"  # noqa: E501

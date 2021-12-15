@@ -2012,8 +2012,8 @@
         "tags": [
           "mpm-controller"
         ],
-        "description": "Get MPM Enable Status",
-        "operationId": "getMPMEnableStatus",
+        "description": "Get MPM enable status",
+        "operationId": "getMpmEnabledStatus",
         "parameters": [
           {
             "name": "domainId",
@@ -2027,7 +2027,7 @@
         ],
         "responses": {
           "200": {
-            "description": "MPM Enable Status",
+            "description": "Get MPM Status",
             "content": {
               "*/*": {
                 "schema": {
@@ -2043,7 +2043,7 @@
           "mpm-controller"
         ],
         "description": "Enable MPM",
-        "operationId": "enableMPM",
+        "operationId": "enableMpm",
         "parameters": [
           {
             "name": "domainId",
@@ -2067,7 +2067,14 @@
         },
         "responses": {
           "200": {
-            "description": "MPM Successfully enabled"
+            "description": "MPM successfully enabled",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedInstanceDto"
+                }
+              }
+            }
           }
         }
       }
@@ -5385,8 +5392,8 @@
           "mpmGcpProjectId": {
             "type": "string"
           },
-          "createMpmGcpProjectBqResources": {
-            "type": "boolean"
+          "zone": {
+            "type": "string"
           }
         },
         "description": "Managed instance definition JSON"
@@ -5487,8 +5494,18 @@
       "GetMpmEnabledStatusDto": {
         "type": "object",
         "properties": {
-          "enabled": {
+          "enabledOnDomain": {
             "type": "boolean"
+          },
+          "serviceStatus": {
+            "type": "string",
+            "enum": [
+              "DEPLOY_PENDING",
+              "DEPLOY_SUCCESS",
+              "DEPLOY_ERROR",
+              "DESTROY_PENDING",
+              "DESTROY_ERROR"
+            ]
           }
         }
       },
@@ -5523,7 +5540,8 @@
               "type": "string",
               "enum": [
                 "MLFLOW",
-                "KUBEFLOW"
+                "KUBEFLOW",
+                "MPM"
               ]
             }
           },
@@ -5598,7 +5616,8 @@
             "type": "string",
             "enum": [
               "MLFLOW",
-              "KUBEFLOW"
+              "KUBEFLOW",
+              "MPM"
             ]
           },
           "state": {

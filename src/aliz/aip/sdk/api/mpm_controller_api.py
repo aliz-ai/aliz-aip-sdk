@@ -266,7 +266,7 @@ class MpmControllerApi(object):
         :param async_req bool
         :param EnableMpmDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :return: None
+        :return: ManagedInstanceDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -289,7 +289,7 @@ class MpmControllerApi(object):
         :param async_req bool
         :param EnableMpmDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :return: None
+        :return: ManagedInstanceDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -334,6 +334,10 @@ class MpmControllerApi(object):
         body_params = None
         if 'body' in params:
             body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])  # noqa: E501
+
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json'])  # noqa: E501
@@ -349,7 +353,7 @@ class MpmControllerApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type=None,  # noqa: E501
+            response_type='ManagedInstanceDto',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -801,13 +805,13 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_mpm_enable_status(self, domain_id, **kwargs):  # noqa: E501
-        """get_mpm_enable_status  # noqa: E501
+    def get_mpm_enabled_status(self, domain_id, **kwargs):  # noqa: E501
+        """get_mpm_enabled_status  # noqa: E501
 
-        Get MPM Enable Status  # noqa: E501
+        Get MPM enable status  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_mpm_enable_status(domain_id, async_req=True)
+        >>> thread = api.get_mpm_enabled_status(domain_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -818,18 +822,18 @@ class MpmControllerApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_mpm_enable_status_with_http_info(domain_id, **kwargs)  # noqa: E501
+            return self.get_mpm_enabled_status_with_http_info(domain_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_mpm_enable_status_with_http_info(domain_id, **kwargs)  # noqa: E501
+            (data) = self.get_mpm_enabled_status_with_http_info(domain_id, **kwargs)  # noqa: E501
             return data
 
-    def get_mpm_enable_status_with_http_info(self, domain_id, **kwargs):  # noqa: E501
-        """get_mpm_enable_status  # noqa: E501
+    def get_mpm_enabled_status_with_http_info(self, domain_id, **kwargs):  # noqa: E501
+        """get_mpm_enabled_status  # noqa: E501
 
-        Get MPM Enable Status  # noqa: E501
+        Get MPM enable status  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_mpm_enable_status_with_http_info(domain_id, async_req=True)
+        >>> thread = api.get_mpm_enabled_status_with_http_info(domain_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -850,14 +854,14 @@ class MpmControllerApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_mpm_enable_status" % key
+                    " to method get_mpm_enabled_status" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'domain_id' is set
         if ('domain_id' not in params or
                 params['domain_id'] is None):
-            raise ValueError("Missing the required parameter `domain_id` when calling `get_mpm_enable_status`")  # noqa: E501
+            raise ValueError("Missing the required parameter `domain_id` when calling `get_mpm_enabled_status`")  # noqa: E501
 
         collection_formats = {}
 
