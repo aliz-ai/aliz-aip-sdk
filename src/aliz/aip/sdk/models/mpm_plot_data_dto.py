@@ -28,7 +28,7 @@ class MpmPlotDataDto(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        '_date': 'datetime',
+        '_date': 'date',
         'data': 'object'
     }
 
@@ -53,7 +53,7 @@ class MpmPlotDataDto(object):
 
 
         :return: The _date of this MpmPlotDataDto.  # noqa: E501
-        :rtype: datetime
+        :rtype: date
         """
         return self.__date
 
@@ -63,7 +63,7 @@ class MpmPlotDataDto(object):
 
 
         :param _date: The _date of this MpmPlotDataDto.  # noqa: E501
-        :type: datetime
+        :type: date
         """
 
         self.__date = _date

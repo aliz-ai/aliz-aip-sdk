@@ -1016,7 +1016,7 @@ class MpmControllerApi(object):
         :param str domain_id: Domain identifier (required)
         :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
         :param str plot_type: PlotType identifier (required)
-        :param datetime _date: Date identifier (required)
+        :param date _date: Date identifier (required)
         :return: MpmPlotDataDto
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1041,7 +1041,7 @@ class MpmControllerApi(object):
         :param str domain_id: Domain identifier (required)
         :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
         :param str plot_type: PlotType identifier (required)
-        :param datetime _date: Date identifier (required)
+        :param date _date: Date identifier (required)
         :return: MpmPlotDataDto
                  If the method is called asynchronously,
                  returns the request thread.

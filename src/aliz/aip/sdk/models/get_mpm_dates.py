@@ -28,7 +28,7 @@ class GetMpmDates(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'dates': 'list[datetime]'
+        'dates': 'list[date]'
     }
 
     attribute_map = {
@@ -48,7 +48,7 @@ class GetMpmDates(object):
 
 
         :return: The dates of this GetMpmDates.  # noqa: E501
-        :rtype: list[datetime]
+        :rtype: list[date]
         """
         return self._dates
 
@@ -58,7 +58,7 @@ class GetMpmDates(object):
 
 
         :param dates: The dates of this GetMpmDates.  # noqa: E501
-        :type: list[datetime]
+        :type: list[date]
         """
 
         self._dates = dates
