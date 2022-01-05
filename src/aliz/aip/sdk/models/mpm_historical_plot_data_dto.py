@@ -29,7 +29,7 @@ class MpmHistoricalPlotDataDto(object):
     """
     swagger_types = {
         '_date': 'datetime',
-        'plot_data_items': 'list[object]',
+        'plot_data_items': 'dict(str, list[object])',
         'class_names': 'list[str]'
     }
 
@@ -79,7 +79,7 @@ class MpmHistoricalPlotDataDto(object):
 
 
         :return: The plot_data_items of this MpmHistoricalPlotDataDto.  # noqa: E501
-        :rtype: list[object]
+        :rtype: dict(str, list[object])
         """
         return self._plot_data_items
 
@@ -89,7 +89,7 @@ class MpmHistoricalPlotDataDto(object):
 
 
         :param plot_data_items: The plot_data_items of this MpmHistoricalPlotDataDto.  # noqa: E501
-        :type: list[object]
+        :type: dict(str, list[object])
         """
 
         self._plot_data_items = plot_data_items
