@@ -2007,6 +2007,81 @@
         }
       }
     },
+    "/api/mpm/v1/domains/{domainId}/models": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "List models",
+        "operationId": "listModels_1",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListMpmModelDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Create an MPM model",
+        "operationId": "createMpmModel",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMpmModelDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MpmModelDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/mpm/v1/domains/{domainId}/enable": {
       "get": {
         "tags": [
@@ -3570,41 +3645,6 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models": {
-      "get": {
-        "tags": [
-          "mpm-controller"
-        ],
-        "description": "List models",
-        "operationId": "listModels_1",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "description": "Domain identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful list",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ModelDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictions": {
       "get": {
         "tags": [
@@ -3994,47 +4034,6 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/metadata": {
-      "get": {
-        "tags": [
-          "mpm-controller"
-        ],
-        "description": "Get model metadata",
-        "operationId": "overviewMetadata",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "description": "Domain identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "unifiedModelId",
-            "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful list",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModelMetadataDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/mainmetric/{mainMetric}": {
       "get": {
         "tags": [
@@ -4269,6 +4268,48 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/MpmAlertIncidentDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/metadata": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get model metadata",
+        "operationId": "overviewMetadata",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MpmModelMetadataDto"
                 }
               }
             }
@@ -4876,6 +4917,41 @@
           }
         }
       }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}": {
+      "delete": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Delete an MPM model",
+        "operationId": "deleteMpmModel",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful delete"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -5258,6 +5334,35 @@
         },
         "description": "Managed instance definition JSON"
       },
+      "CreateMpmModelDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "REGRESSION",
+              "CLASSIFICATION"
+            ]
+          },
+          "mainEvaluationMetricType": {
+            "type": "string",
+            "enum": [
+              "FEATURE_DRIFT"
+            ]
+          },
+          "modelPeriodicity": {
+            "type": "string",
+            "enum": [
+              "DAY",
+              "WEEK",
+              "MONTH"
+            ]
+          }
+        }
+      },
       "CreateTemplateDto": {
         "type": "object",
         "properties": {
@@ -5572,6 +5677,17 @@
           }
         }
       },
+      "ListMpmModelDto": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string"
+          },
+          "modelName": {
+            "type": "string"
+          }
+        }
+      },
       "MainMetricDto": {
         "type": "object",
         "properties": {
@@ -5671,72 +5787,6 @@
             "format": "double"
           },
           "xvalue": {
-            "type": "string"
-          }
-        }
-      },
-      "ModelDto": {
-        "type": "object",
-        "properties": {
-          "unifiedModelId": {
-            "type": "string"
-          },
-          "modelName": {
-            "type": "string"
-          }
-        }
-      },
-      "ModelMetadataDto": {
-        "type": "object",
-        "properties": {
-          "unifiedModelId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "creator": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "modelType": {
-            "type": "string",
-            "enum": [
-              "REGRESSION",
-              "CLASSIFICATION"
-            ]
-          },
-          "evaluationMetric": {
-            "type": "string",
-            "enum": [
-              "MSE"
-            ]
-          },
-          "modelPeriodicity": {
-            "type": "string",
-            "enum": [
-              "DAY",
-              "WEEK",
-              "MONTH"
-            ]
-          },
-          "modelRegistryLink": {
-            "type": "string"
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "lastUpdatedDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string"
-          },
-          "apiLink": {
             "type": "string"
           }
         }
@@ -5844,6 +5894,94 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "MpmModelDto": {
+        "type": "object",
+        "properties": {
+          "mpmModelId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "REGRESSION",
+              "CLASSIFICATION"
+            ]
+          },
+          "mainEvaluationMetricType": {
+            "type": "string",
+            "enum": [
+              "FEATURE_DRIFT"
+            ]
+          },
+          "modelPeriodicity": {
+            "type": "string",
+            "enum": [
+              "DAY",
+              "WEEK",
+              "MONTH"
+            ]
+          }
+        }
+      },
+      "MpmModelMetadataDto": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "creator": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "REGRESSION",
+              "CLASSIFICATION"
+            ]
+          },
+          "evaluationMetric": {
+            "type": "string",
+            "enum": [
+              "FEATURE_DRIFT"
+            ]
+          },
+          "modelPeriodicity": {
+            "type": "string",
+            "enum": [
+              "DAY",
+              "WEEK",
+              "MONTH"
+            ]
+          },
+          "modelRegistryLink": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string"
+          },
+          "apiLink": {
+            "type": "string"
           }
         }
       },
