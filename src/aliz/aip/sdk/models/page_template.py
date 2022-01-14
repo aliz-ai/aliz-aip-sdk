@@ -35,9 +35,9 @@ class PageTemplate(object):
         'size': 'int',
         'content': 'list[Template]',
         'pageable': 'Pageable',
-        'number_of_elements': 'int',
         'first': 'bool',
         'last': 'bool',
+        'number_of_elements': 'int',
         'empty': 'bool'
     }
 
@@ -49,13 +49,13 @@ class PageTemplate(object):
         'size': 'size',
         'content': 'content',
         'pageable': 'pageable',
-        'number_of_elements': 'numberOfElements',
         'first': 'first',
         'last': 'last',
+        'number_of_elements': 'numberOfElements',
         'empty': 'empty'
     }
 
-    def __init__(self, total_pages=None, total_elements=None, number=None, sort=None, size=None, content=None, pageable=None, number_of_elements=None, first=None, last=None, empty=None):  # noqa: E501
+    def __init__(self, total_pages=None, total_elements=None, number=None, sort=None, size=None, content=None, pageable=None, first=None, last=None, number_of_elements=None, empty=None):  # noqa: E501
         """PageTemplate - a model defined in Swagger"""  # noqa: E501
         self._total_pages = None
         self._total_elements = None
@@ -64,9 +64,9 @@ class PageTemplate(object):
         self._size = None
         self._content = None
         self._pageable = None
-        self._number_of_elements = None
         self._first = None
         self._last = None
+        self._number_of_elements = None
         self._empty = None
         self.discriminator = None
         if total_pages is not None:
@@ -83,12 +83,12 @@ class PageTemplate(object):
             self.content = content
         if pageable is not None:
             self.pageable = pageable
-        if number_of_elements is not None:
-            self.number_of_elements = number_of_elements
         if first is not None:
             self.first = first
         if last is not None:
             self.last = last
+        if number_of_elements is not None:
+            self.number_of_elements = number_of_elements
         if empty is not None:
             self.empty = empty
 
@@ -240,27 +240,6 @@ class PageTemplate(object):
         self._pageable = pageable
 
     @property
-    def number_of_elements(self):
-        """Gets the number_of_elements of this PageTemplate.  # noqa: E501
-
-
-        :return: The number_of_elements of this PageTemplate.  # noqa: E501
-        :rtype: int
-        """
-        return self._number_of_elements
-
-    @number_of_elements.setter
-    def number_of_elements(self, number_of_elements):
-        """Sets the number_of_elements of this PageTemplate.
-
-
-        :param number_of_elements: The number_of_elements of this PageTemplate.  # noqa: E501
-        :type: int
-        """
-
-        self._number_of_elements = number_of_elements
-
-    @property
     def first(self):
         """Gets the first of this PageTemplate.  # noqa: E501
 
@@ -301,6 +280,27 @@ class PageTemplate(object):
         """
 
         self._last = last
+
+    @property
+    def number_of_elements(self):
+        """Gets the number_of_elements of this PageTemplate.  # noqa: E501
+
+
+        :return: The number_of_elements of this PageTemplate.  # noqa: E501
+        :rtype: int
+        """
+        return self._number_of_elements
+
+    @number_of_elements.setter
+    def number_of_elements(self, number_of_elements):
+        """Sets the number_of_elements of this PageTemplate.
+
+
+        :param number_of_elements: The number_of_elements of this PageTemplate.  # noqa: E501
+        :type: int
+        """
+
+        self._number_of_elements = number_of_elements
 
     @property
     def empty(self):
