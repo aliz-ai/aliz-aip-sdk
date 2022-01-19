@@ -31,36 +31,42 @@ class MpmAlertPolicyDto(object):
         'mpm_alert_policy_id': 'str',
         'policy_name': 'str',
         'metric_type': 'str',
-        'threshold': 'float',
-        'comparison': 'str',
-        'duration': 'int'
+        'value': 'float',
+        'condition': 'str',
+        'condition_window': 'str',
+        'condition_window_size': 'int'
     }
 
     attribute_map = {
         'mpm_alert_policy_id': 'mpmAlertPolicyId',
         'policy_name': 'policyName',
         'metric_type': 'metricType',
-        'threshold': 'threshold',
-        'comparison': 'comparison',
-        'duration': 'duration'
+        'value': 'value',
+        'condition': 'condition',
+        'condition_window': 'conditionWindow',
+        'condition_window_size': 'conditionWindowSize'
     }
 
-    def __init__(self, mpm_alert_policy_id=None, policy_name=None, metric_type=None, threshold=None, comparison=None, duration=None):  # noqa: E501
+    def __init__(self, mpm_alert_policy_id=None, policy_name=None, metric_type=None, value=None, condition=None, condition_window=None, condition_window_size=None):  # noqa: E501
         """MpmAlertPolicyDto - a model defined in Swagger"""  # noqa: E501
         self._mpm_alert_policy_id = None
         self._policy_name = None
         self._metric_type = None
-        self._threshold = None
-        self._comparison = None
-        self._duration = None
+        self._value = None
+        self._condition = None
+        self._condition_window = None
+        self._condition_window_size = None
         self.discriminator = None
         if mpm_alert_policy_id is not None:
             self.mpm_alert_policy_id = mpm_alert_policy_id
         self.policy_name = policy_name
         self.metric_type = metric_type
-        self.threshold = threshold
-        self.comparison = comparison
-        self.duration = duration
+        self.value = value
+        self.condition = condition
+        if condition_window is not None:
+            self.condition_window = condition_window
+        if condition_window_size is not None:
+            self.condition_window_size = condition_window_size
 
     @property
     def mpm_alert_policy_id(self):
@@ -126,7 +132,7 @@ class MpmAlertPolicyDto(object):
         """
         if metric_type is None:
             raise ValueError("Invalid value for `metric_type`, must not be `None`")  # noqa: E501
-        allowed_values = ["FEATURE_DRIFT"]  # noqa: E501
+        allowed_values = ["ROC_CURVE_AUC", "KS_STATISTICS", "PR_CURVE_AP"]  # noqa: E501
         if metric_type not in allowed_values:
             raise ValueError(
                 "Invalid value for `metric_type` ({0}), must be one of {1}"  # noqa: E501
@@ -136,79 +142,104 @@ class MpmAlertPolicyDto(object):
         self._metric_type = metric_type
 
     @property
-    def threshold(self):
-        """Gets the threshold of this MpmAlertPolicyDto.  # noqa: E501
+    def value(self):
+        """Gets the value of this MpmAlertPolicyDto.  # noqa: E501
 
 
-        :return: The threshold of this MpmAlertPolicyDto.  # noqa: E501
+        :return: The value of this MpmAlertPolicyDto.  # noqa: E501
         :rtype: float
         """
-        return self._threshold
+        return self._value
 
-    @threshold.setter
-    def threshold(self, threshold):
-        """Sets the threshold of this MpmAlertPolicyDto.
+    @value.setter
+    def value(self, value):
+        """Sets the value of this MpmAlertPolicyDto.
 
 
-        :param threshold: The threshold of this MpmAlertPolicyDto.  # noqa: E501
+        :param value: The value of this MpmAlertPolicyDto.  # noqa: E501
         :type: float
         """
-        if threshold is None:
-            raise ValueError("Invalid value for `threshold`, must not be `None`")  # noqa: E501
+        if value is None:
+            raise ValueError("Invalid value for `value`, must not be `None`")  # noqa: E501
 
-        self._threshold = threshold
+        self._value = value
 
     @property
-    def comparison(self):
-        """Gets the comparison of this MpmAlertPolicyDto.  # noqa: E501
+    def condition(self):
+        """Gets the condition of this MpmAlertPolicyDto.  # noqa: E501
 
 
-        :return: The comparison of this MpmAlertPolicyDto.  # noqa: E501
+        :return: The condition of this MpmAlertPolicyDto.  # noqa: E501
         :rtype: str
         """
-        return self._comparison
+        return self._condition
 
-    @comparison.setter
-    def comparison(self, comparison):
-        """Sets the comparison of this MpmAlertPolicyDto.
+    @condition.setter
+    def condition(self, condition):
+        """Sets the condition of this MpmAlertPolicyDto.
 
 
-        :param comparison: The comparison of this MpmAlertPolicyDto.  # noqa: E501
+        :param condition: The condition of this MpmAlertPolicyDto.  # noqa: E501
         :type: str
         """
-        if comparison is None:
-            raise ValueError("Invalid value for `comparison`, must not be `None`")  # noqa: E501
-        allowed_values = ["COMPARISON_GT", "COMPARISON_GE", "COMPARISON_LT", "COMPARISON_LE", "COMPARISON_EQ", "COMPARISON_NE"]  # noqa: E501
-        if comparison not in allowed_values:
+        if condition is None:
+            raise ValueError("Invalid value for `condition`, must not be `None`")  # noqa: E501
+        allowed_values = ["GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL", "EQUAL", "NOT_EQUAL", "INCREASED_BY", "DECREASED_BY", "CHANGED_BY"]  # noqa: E501
+        if condition not in allowed_values:
             raise ValueError(
-                "Invalid value for `comparison` ({0}), must be one of {1}"  # noqa: E501
-                .format(comparison, allowed_values)
+                "Invalid value for `condition` ({0}), must be one of {1}"  # noqa: E501
+                .format(condition, allowed_values)
             )
 
-        self._comparison = comparison
+        self._condition = condition
 
     @property
-    def duration(self):
-        """Gets the duration of this MpmAlertPolicyDto.  # noqa: E501
+    def condition_window(self):
+        """Gets the condition_window of this MpmAlertPolicyDto.  # noqa: E501
 
 
-        :return: The duration of this MpmAlertPolicyDto.  # noqa: E501
+        :return: The condition_window of this MpmAlertPolicyDto.  # noqa: E501
+        :rtype: str
+        """
+        return self._condition_window
+
+    @condition_window.setter
+    def condition_window(self, condition_window):
+        """Sets the condition_window of this MpmAlertPolicyDto.
+
+
+        :param condition_window: The condition_window of this MpmAlertPolicyDto.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["COUNT", "HOUR", "DAY"]  # noqa: E501
+        if condition_window not in allowed_values:
+            raise ValueError(
+                "Invalid value for `condition_window` ({0}), must be one of {1}"  # noqa: E501
+                .format(condition_window, allowed_values)
+            )
+
+        self._condition_window = condition_window
+
+    @property
+    def condition_window_size(self):
+        """Gets the condition_window_size of this MpmAlertPolicyDto.  # noqa: E501
+
+
+        :return: The condition_window_size of this MpmAlertPolicyDto.  # noqa: E501
         :rtype: int
         """
-        return self._duration
+        return self._condition_window_size
 
-    @duration.setter
-    def duration(self, duration):
-        """Sets the duration of this MpmAlertPolicyDto.
+    @condition_window_size.setter
+    def condition_window_size(self, condition_window_size):
+        """Sets the condition_window_size of this MpmAlertPolicyDto.
 
 
-        :param duration: The duration of this MpmAlertPolicyDto.  # noqa: E501
+        :param condition_window_size: The condition_window_size of this MpmAlertPolicyDto.  # noqa: E501
         :type: int
         """
-        if duration is None:
-            raise ValueError("Invalid value for `duration`, must not be `None`")  # noqa: E501
 
-        self._duration = duration
+        self._condition_window_size = condition_window_size
 
     def to_dict(self):
         """Returns the model properties as a dict"""

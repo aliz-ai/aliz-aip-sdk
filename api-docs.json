@@ -635,7 +635,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -678,7 +678,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -728,7 +728,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -3836,7 +3836,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -3878,7 +3878,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -3939,7 +3939,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -3997,7 +3997,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -4161,7 +4161,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -4211,7 +4211,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -4256,7 +4256,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -4301,7 +4301,7 @@
           {
             "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
               "type": "string",
@@ -5848,11 +5848,10 @@
       },
       "MpmAlertPolicyDto": {
         "required": [
-          "comparison",
-          "duration",
+          "condition",
           "metricType",
           "policyName",
-          "threshold"
+          "value"
         ],
         "type": "object",
         "properties": {
@@ -5866,25 +5865,38 @@
           "metricType": {
             "type": "string",
             "enum": [
-              "FEATURE_DRIFT"
+              "ROC_CURVE_AUC",
+              "KS_STATISTICS",
+              "PR_CURVE_AP"
             ]
           },
-          "threshold": {
+          "value": {
             "type": "number",
             "format": "float"
           },
-          "comparison": {
+          "condition": {
             "type": "string",
             "enum": [
-              "COMPARISON_GT",
-              "COMPARISON_GE",
-              "COMPARISON_LT",
-              "COMPARISON_LE",
-              "COMPARISON_EQ",
-              "COMPARISON_NE"
+              "GREATER_THAN",
+              "GREATER_THAN_OR_EQUAL",
+              "LESS_THAN",
+              "LESS_THAN_OR_EQUAL",
+              "EQUAL",
+              "NOT_EQUAL",
+              "INCREASED_BY",
+              "DECREASED_BY",
+              "CHANGED_BY"
             ]
           },
-          "duration": {
+          "conditionWindow": {
+            "type": "string",
+            "enum": [
+              "COUNT",
+              "HOUR",
+              "DAY"
+            ]
+          },
+          "conditionWindowSize": {
             "type": "integer",
             "format": "int32"
           }

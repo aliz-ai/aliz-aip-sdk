@@ -44,7 +44,7 @@ class MpmControllerApi(object):
         :param async_req bool
         :param MpmAlertPolicyDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
                  returns the request thread.
@@ -68,7 +68,7 @@ class MpmControllerApi(object):
         :param async_req bool
         :param MpmAlertPolicyDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
                  returns the request thread.
@@ -265,7 +265,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_policy_id: Alert policy identifier (required)
         :return: None
                  If the method is called asynchronously,
@@ -289,7 +289,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_policy_id: Alert policy identifier (required)
         :return: None
                  If the method is called asynchronously,
@@ -578,7 +578,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_incident_id: Alert incident identifier (required)
         :return: MpmAlertIncidentDto
                  If the method is called asynchronously,
@@ -602,7 +602,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_incident_id: Alert incident identifier (required)
         :return: MpmAlertIncidentDto
                  If the method is called asynchronously,
@@ -689,7 +689,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_policy_id: Alert policy identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
@@ -713,7 +713,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_policy_id: Alert policy identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
@@ -800,7 +800,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
         :return: GetMpmDates
                  If the method is called asynchronously,
@@ -824,7 +824,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
         :return: GetMpmDates
                  If the method is called asynchronously,
@@ -911,7 +911,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
         :return: list[MpmHistoricalPlotDataDto]
                  If the method is called asynchronously,
@@ -935,7 +935,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
         :return: list[MpmHistoricalPlotDataDto]
                  If the method is called asynchronously,
@@ -1117,7 +1117,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: GetMpmPlotTypes
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1140,7 +1140,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: GetMpmPlotTypes
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1220,7 +1220,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
         :param date _date: Date identifier (required)
         :return: MpmPlotDataDto
@@ -1245,7 +1245,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
         :param date _date: Date identifier (required)
         :return: MpmPlotDataDto
@@ -1339,7 +1339,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: list[MpmAlertIncidentDto]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1362,7 +1362,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: list[MpmAlertIncidentDto]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1442,7 +1442,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: list[MpmAlertPolicyDto]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1465,7 +1465,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: list[MpmAlertPolicyDto]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2267,7 +2267,7 @@ class MpmControllerApi(object):
         :param async_req bool
         :param MpmAlertPolicyDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
                  returns the request thread.
@@ -2291,7 +2291,7 @@ class MpmControllerApi(object):
         :param async_req bool
         :param MpmAlertPolicyDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :param str model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
                  returns the request thread.
