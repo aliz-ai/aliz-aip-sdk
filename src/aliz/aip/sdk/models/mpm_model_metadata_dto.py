@@ -226,7 +226,7 @@ class MpmModelMetadataDto(object):
         :param evaluation_metric: The evaluation_metric of this MpmModelMetadataDto.  # noqa: E501
         :type: str
         """
-        allowed_values = ["MSE"]  # noqa: E501
+        allowed_values = ["MSE", "AUC"]  # noqa: E501
         if evaluation_metric not in allowed_values:
             raise ValueError(
                 "Invalid value for `evaluation_metric` ({0}), must be one of {1}"  # noqa: E501

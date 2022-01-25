@@ -123,7 +123,7 @@ class CreateMpmModelDto(object):
         :param main_evaluation_metric_type: The main_evaluation_metric_type of this CreateMpmModelDto.  # noqa: E501
         :type: str
         """
-        allowed_values = ["MSE"]  # noqa: E501
+        allowed_values = ["MSE", "AUC"]  # noqa: E501
         if main_evaluation_metric_type not in allowed_values:
             raise ValueError(
                 "Invalid value for `main_evaluation_metric_type` ({0}), must be one of {1}"  # noqa: E501

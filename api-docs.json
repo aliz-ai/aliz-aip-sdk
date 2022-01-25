@@ -4122,7 +4122,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "MSE"
+                "MSE",
+                "AUC"
               ]
             }
           }
@@ -5366,7 +5367,8 @@
           "mainEvaluationMetricType": {
             "type": "string",
             "enum": [
-              "MSE"
+              "MSE",
+              "AUC"
             ]
           },
           "modelPeriodicity": {
@@ -5714,7 +5716,8 @@
           "mainMetric": {
             "type": "string",
             "enum": [
-              "MSE"
+              "MSE",
+              "AUC"
             ]
           },
           "currentValue": {
@@ -5946,7 +5949,8 @@
           "mainEvaluationMetricType": {
             "type": "string",
             "enum": [
-              "MSE"
+              "MSE",
+              "AUC"
             ]
           },
           "modelPeriodicity": {
@@ -5984,7 +5988,8 @@
           "evaluationMetric": {
             "type": "string",
             "enum": [
-              "MSE"
+              "MSE",
+              "AUC"
             ]
           },
           "modelPeriodicity": {
@@ -6087,15 +6092,15 @@
           "pageable": {
             "$ref": "#/components/schemas/Pageable"
           },
-          "numberOfElements": {
-            "type": "integer",
-            "format": "int32"
-          },
           "first": {
             "type": "boolean"
           },
           "last": {
             "type": "boolean"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
           },
           "empty": {
             "type": "boolean"
@@ -6133,15 +6138,15 @@
           "pageable": {
             "$ref": "#/components/schemas/Pageable"
           },
-          "numberOfElements": {
-            "type": "integer",
-            "format": "int32"
-          },
           "first": {
             "type": "boolean"
           },
           "last": {
             "type": "boolean"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
           },
           "empty": {
             "type": "boolean"
