@@ -91,7 +91,7 @@ class GetTemplateVariablesDto(object):
         :param managed_service_dependencies: The managed_service_dependencies of this GetTemplateVariablesDto.  # noqa: E501
         :type: list[str]
         """
-        allowed_values = ["MLFLOW", "KUBEFLOW"]  # noqa: E501
+        allowed_values = ["MLFLOW", "KUBEFLOW", "MPM"]  # noqa: E501
         if not set(managed_service_dependencies).issubset(set(allowed_values)):
             raise ValueError(
                 "Invalid values for `managed_service_dependencies` [{0}], must be a subset of [{1}]"  # noqa: E501

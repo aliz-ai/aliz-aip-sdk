@@ -32,49 +32,49 @@ class MpmControllerApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def create_alert_policy(self, body, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def create_alert_policy(self, body, domain_id, model_id, **kwargs):  # noqa: E501
         """create_alert_policy  # noqa: E501
 
         Create an alert policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_alert_policy(body, domain_id, unified_model_id, async_req=True)
+        >>> thread = api.create_alert_policy(body, domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MpmAlertPolicyDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.create_alert_policy_with_http_info(body, domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.create_alert_policy_with_http_info(body, domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.create_alert_policy_with_http_info(body, domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.create_alert_policy_with_http_info(body, domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def create_alert_policy_with_http_info(self, body, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def create_alert_policy_with_http_info(self, body, domain_id, model_id, **kwargs):  # noqa: E501
         """create_alert_policy  # noqa: E501
 
         Create an alert policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_alert_policy_with_http_info(body, domain_id, unified_model_id, async_req=True)
+        >>> thread = api.create_alert_policy_with_http_info(body, domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MpmAlertPolicyDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['body', 'domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -97,18 +97,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `create_alert_policy`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `create_alert_policy`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `create_alert_policy`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -132,7 +132,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies', 'POST',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/alertPolicies', 'POST',
             path_params,
             query_params,
             header_params,
@@ -147,18 +147,125 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def delete_alert_policy(self, domain_id, unified_model_id, alert_policy_id, **kwargs):  # noqa: E501
+    def create_mpm_model(self, body, domain_id, **kwargs):  # noqa: E501
+        """create_mpm_model  # noqa: E501
+
+        Create an MPM model  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_mpm_model(body, domain_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CreateMpmModelDto body: (required)
+        :param str domain_id: Domain identifier (required)
+        :return: MpmModelDto
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.create_mpm_model_with_http_info(body, domain_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.create_mpm_model_with_http_info(body, domain_id, **kwargs)  # noqa: E501
+            return data
+
+    def create_mpm_model_with_http_info(self, body, domain_id, **kwargs):  # noqa: E501
+        """create_mpm_model  # noqa: E501
+
+        Create an MPM model  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_mpm_model_with_http_info(body, domain_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param CreateMpmModelDto body: (required)
+        :param str domain_id: Domain identifier (required)
+        :return: MpmModelDto
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'domain_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_mpm_model" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `create_mpm_model`")  # noqa: E501
+        # verify the required parameter 'domain_id' is set
+        if ('domain_id' not in params or
+                params['domain_id'] is None):
+            raise ValueError("Missing the required parameter `domain_id` when calling `create_mpm_model`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'domain_id' in params:
+            path_params['domainId'] = params['domain_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['bearer-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/api/mpm/v1/domains/{domainId}/models', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='MpmModelDto',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def delete_alert_policy(self, domain_id, model_id, alert_policy_id, **kwargs):  # noqa: E501
         """delete_alert_policy  # noqa: E501
 
         Delete an alert policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_alert_policy(domain_id, unified_model_id, alert_policy_id, async_req=True)
+        >>> thread = api.delete_alert_policy(domain_id, model_id, alert_policy_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_policy_id: Alert policy identifier (required)
         :return: None
                  If the method is called asynchronously,
@@ -166,30 +273,30 @@ class MpmControllerApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.delete_alert_policy_with_http_info(domain_id, unified_model_id, alert_policy_id, **kwargs)  # noqa: E501
+            return self.delete_alert_policy_with_http_info(domain_id, model_id, alert_policy_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.delete_alert_policy_with_http_info(domain_id, unified_model_id, alert_policy_id, **kwargs)  # noqa: E501
+            (data) = self.delete_alert_policy_with_http_info(domain_id, model_id, alert_policy_id, **kwargs)  # noqa: E501
             return data
 
-    def delete_alert_policy_with_http_info(self, domain_id, unified_model_id, alert_policy_id, **kwargs):  # noqa: E501
+    def delete_alert_policy_with_http_info(self, domain_id, model_id, alert_policy_id, **kwargs):  # noqa: E501
         """delete_alert_policy  # noqa: E501
 
         Delete an alert policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_alert_policy_with_http_info(domain_id, unified_model_id, alert_policy_id, async_req=True)
+        >>> thread = api.delete_alert_policy_with_http_info(domain_id, model_id, alert_policy_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_policy_id: Alert policy identifier (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id', 'alert_policy_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id', 'alert_policy_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -208,10 +315,10 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `delete_alert_policy`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `delete_alert_policy`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `delete_alert_policy`")  # noqa: E501
         # verify the required parameter 'alert_policy_id' is set
         if ('alert_policy_id' not in params or
                 params['alert_policy_id'] is None):
@@ -222,8 +329,8 @@ class MpmControllerApi(object):
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
         if 'alert_policy_id' in params:
             path_params['alertPolicyId'] = params['alert_policy_id']  # noqa: E501
 
@@ -239,7 +346,106 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies/{alertPolicyId}', 'DELETE',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/alertPolicies/{alertPolicyId}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def delete_mpm_model(self, domain_id, model_id, **kwargs):  # noqa: E501
+        """delete_mpm_model  # noqa: E501
+
+        Delete an MPM model  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_mpm_model(domain_id, model_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str domain_id: Domain identifier (required)
+        :param str model_id: Model identifier (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_mpm_model_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_mpm_model_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
+            return data
+
+    def delete_mpm_model_with_http_info(self, domain_id, model_id, **kwargs):  # noqa: E501
+        """delete_mpm_model  # noqa: E501
+
+        Delete an MPM model  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_mpm_model_with_http_info(domain_id, model_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str domain_id: Domain identifier (required)
+        :param str model_id: Model identifier (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['domain_id', 'model_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_mpm_model" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'domain_id' is set
+        if ('domain_id' not in params or
+                params['domain_id'] is None):
+            raise ValueError("Missing the required parameter `domain_id` when calling `delete_mpm_model`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `delete_mpm_model`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'domain_id' in params:
+            path_params['domainId'] = params['domain_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # Authentication setting
+        auth_settings = ['bearer-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -266,7 +472,7 @@ class MpmControllerApi(object):
         :param async_req bool
         :param EnableMpmDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :return: None
+        :return: ManagedInstanceDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -289,7 +495,7 @@ class MpmControllerApi(object):
         :param async_req bool
         :param EnableMpmDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :return: None
+        :return: ManagedInstanceDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -334,6 +540,10 @@ class MpmControllerApi(object):
         body_params = None
         if 'body' in params:
             body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])  # noqa: E501
+
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json'])  # noqa: E501
@@ -349,7 +559,7 @@ class MpmControllerApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type=None,  # noqa: E501
+            response_type='ManagedInstanceDto',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -357,18 +567,18 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_alert_incident(self, domain_id, unified_model_id, alert_incident_id, **kwargs):  # noqa: E501
+    def get_alert_incident(self, domain_id, model_id, alert_incident_id, **kwargs):  # noqa: E501
         """get_alert_incident  # noqa: E501
 
         Get an alert incident  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_alert_incident(domain_id, unified_model_id, alert_incident_id, async_req=True)
+        >>> thread = api.get_alert_incident(domain_id, model_id, alert_incident_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_incident_id: Alert incident identifier (required)
         :return: MpmAlertIncidentDto
                  If the method is called asynchronously,
@@ -376,30 +586,30 @@ class MpmControllerApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_alert_incident_with_http_info(domain_id, unified_model_id, alert_incident_id, **kwargs)  # noqa: E501
+            return self.get_alert_incident_with_http_info(domain_id, model_id, alert_incident_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_alert_incident_with_http_info(domain_id, unified_model_id, alert_incident_id, **kwargs)  # noqa: E501
+            (data) = self.get_alert_incident_with_http_info(domain_id, model_id, alert_incident_id, **kwargs)  # noqa: E501
             return data
 
-    def get_alert_incident_with_http_info(self, domain_id, unified_model_id, alert_incident_id, **kwargs):  # noqa: E501
+    def get_alert_incident_with_http_info(self, domain_id, model_id, alert_incident_id, **kwargs):  # noqa: E501
         """get_alert_incident  # noqa: E501
 
         Get an alert incident  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_alert_incident_with_http_info(domain_id, unified_model_id, alert_incident_id, async_req=True)
+        >>> thread = api.get_alert_incident_with_http_info(domain_id, model_id, alert_incident_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_incident_id: Alert incident identifier (required)
         :return: MpmAlertIncidentDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id', 'alert_incident_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id', 'alert_incident_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -418,10 +628,10 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `get_alert_incident`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `get_alert_incident`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `get_alert_incident`")  # noqa: E501
         # verify the required parameter 'alert_incident_id' is set
         if ('alert_incident_id' not in params or
                 params['alert_incident_id'] is None):
@@ -432,8 +642,8 @@ class MpmControllerApi(object):
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
         if 'alert_incident_id' in params:
             path_params['alertIncidentId'] = params['alert_incident_id']  # noqa: E501
 
@@ -453,7 +663,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertIncidents/{alertIncidentId}', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/alertIncidents/{alertIncidentId}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -468,18 +678,18 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_alert_policy(self, domain_id, unified_model_id, alert_policy_id, **kwargs):  # noqa: E501
+    def get_alert_policy(self, domain_id, model_id, alert_policy_id, **kwargs):  # noqa: E501
         """get_alert_policy  # noqa: E501
 
         Get an alert policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_alert_policy(domain_id, unified_model_id, alert_policy_id, async_req=True)
+        >>> thread = api.get_alert_policy(domain_id, model_id, alert_policy_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_policy_id: Alert policy identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
@@ -487,30 +697,30 @@ class MpmControllerApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_alert_policy_with_http_info(domain_id, unified_model_id, alert_policy_id, **kwargs)  # noqa: E501
+            return self.get_alert_policy_with_http_info(domain_id, model_id, alert_policy_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_alert_policy_with_http_info(domain_id, unified_model_id, alert_policy_id, **kwargs)  # noqa: E501
+            (data) = self.get_alert_policy_with_http_info(domain_id, model_id, alert_policy_id, **kwargs)  # noqa: E501
             return data
 
-    def get_alert_policy_with_http_info(self, domain_id, unified_model_id, alert_policy_id, **kwargs):  # noqa: E501
+    def get_alert_policy_with_http_info(self, domain_id, model_id, alert_policy_id, **kwargs):  # noqa: E501
         """get_alert_policy  # noqa: E501
 
         Get an alert policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_alert_policy_with_http_info(domain_id, unified_model_id, alert_policy_id, async_req=True)
+        >>> thread = api.get_alert_policy_with_http_info(domain_id, model_id, alert_policy_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str alert_policy_id: Alert policy identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id', 'alert_policy_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id', 'alert_policy_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -529,10 +739,10 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `get_alert_policy`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `get_alert_policy`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `get_alert_policy`")  # noqa: E501
         # verify the required parameter 'alert_policy_id' is set
         if ('alert_policy_id' not in params or
                 params['alert_policy_id'] is None):
@@ -543,8 +753,8 @@ class MpmControllerApi(object):
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
         if 'alert_policy_id' in params:
             path_params['alertPolicyId'] = params['alert_policy_id']  # noqa: E501
 
@@ -564,7 +774,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies/{alertPolicyId}', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/alertPolicies/{alertPolicyId}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -579,18 +789,18 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_dates(self, domain_id, unified_model_id, plot_type, **kwargs):  # noqa: E501
+    def get_dates(self, domain_id, model_id, plot_type, **kwargs):  # noqa: E501
         """get_dates  # noqa: E501
 
         Get date and reference dates  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_dates(domain_id, unified_model_id, plot_type, async_req=True)
+        >>> thread = api.get_dates(domain_id, model_id, plot_type, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
         :return: GetMpmDates
                  If the method is called asynchronously,
@@ -598,30 +808,30 @@ class MpmControllerApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_dates_with_http_info(domain_id, unified_model_id, plot_type, **kwargs)  # noqa: E501
+            return self.get_dates_with_http_info(domain_id, model_id, plot_type, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_dates_with_http_info(domain_id, unified_model_id, plot_type, **kwargs)  # noqa: E501
+            (data) = self.get_dates_with_http_info(domain_id, model_id, plot_type, **kwargs)  # noqa: E501
             return data
 
-    def get_dates_with_http_info(self, domain_id, unified_model_id, plot_type, **kwargs):  # noqa: E501
+    def get_dates_with_http_info(self, domain_id, model_id, plot_type, **kwargs):  # noqa: E501
         """get_dates  # noqa: E501
 
         Get date and reference dates  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_dates_with_http_info(domain_id, unified_model_id, plot_type, async_req=True)
+        >>> thread = api.get_dates_with_http_info(domain_id, model_id, plot_type, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
         :return: GetMpmDates
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id', 'plot_type']  # noqa: E501
+        all_params = ['domain_id', 'model_id', 'plot_type']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -640,10 +850,10 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `get_dates`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `get_dates`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `get_dates`")  # noqa: E501
         # verify the required parameter 'plot_type' is set
         if ('plot_type' not in params or
                 params['plot_type'] is None):
@@ -654,8 +864,8 @@ class MpmControllerApi(object):
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
         if 'plot_type' in params:
             path_params['plotType'] = params['plot_type']  # noqa: E501
 
@@ -675,7 +885,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes/{plotType}/dates', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/plotTypes/{plotType}/dates', 'GET',
             path_params,
             query_params,
             header_params,
@@ -690,13 +900,124 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_mpm_enable_status(self, domain_id, **kwargs):  # noqa: E501
-        """get_mpm_enable_status  # noqa: E501
+    def get_historical_plot_type_data(self, domain_id, model_id, plot_type, **kwargs):  # noqa: E501
+        """get_historical_plot_type_data  # noqa: E501
 
-        Get MPM Enable Status  # noqa: E501
+        Get historical plot type data  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_mpm_enable_status(domain_id, async_req=True)
+        >>> thread = api.get_historical_plot_type_data(domain_id, model_id, plot_type, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str domain_id: Domain identifier (required)
+        :param str model_id: Model identifier (required)
+        :param str plot_type: PlotType identifier (required)
+        :return: list[MpmHistoricalPlotDataDto]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_historical_plot_type_data_with_http_info(domain_id, model_id, plot_type, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_historical_plot_type_data_with_http_info(domain_id, model_id, plot_type, **kwargs)  # noqa: E501
+            return data
+
+    def get_historical_plot_type_data_with_http_info(self, domain_id, model_id, plot_type, **kwargs):  # noqa: E501
+        """get_historical_plot_type_data  # noqa: E501
+
+        Get historical plot type data  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_historical_plot_type_data_with_http_info(domain_id, model_id, plot_type, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str domain_id: Domain identifier (required)
+        :param str model_id: Model identifier (required)
+        :param str plot_type: PlotType identifier (required)
+        :return: list[MpmHistoricalPlotDataDto]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['domain_id', 'model_id', 'plot_type']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_historical_plot_type_data" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'domain_id' is set
+        if ('domain_id' not in params or
+                params['domain_id'] is None):
+            raise ValueError("Missing the required parameter `domain_id` when calling `get_historical_plot_type_data`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `get_historical_plot_type_data`")  # noqa: E501
+        # verify the required parameter 'plot_type' is set
+        if ('plot_type' not in params or
+                params['plot_type'] is None):
+            raise ValueError("Missing the required parameter `plot_type` when calling `get_historical_plot_type_data`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'domain_id' in params:
+            path_params['domainId'] = params['domain_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
+        if 'plot_type' in params:
+            path_params['plotType'] = params['plot_type']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['*/*'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['bearer-key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/plotTypes/{plotType}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[MpmHistoricalPlotDataDto]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_mpm_enabled_status(self, domain_id, **kwargs):  # noqa: E501
+        """get_mpm_enabled_status  # noqa: E501
+
+        Get MPM enable status  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_mpm_enabled_status(domain_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -707,18 +1028,18 @@ class MpmControllerApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_mpm_enable_status_with_http_info(domain_id, **kwargs)  # noqa: E501
+            return self.get_mpm_enabled_status_with_http_info(domain_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_mpm_enable_status_with_http_info(domain_id, **kwargs)  # noqa: E501
+            (data) = self.get_mpm_enabled_status_with_http_info(domain_id, **kwargs)  # noqa: E501
             return data
 
-    def get_mpm_enable_status_with_http_info(self, domain_id, **kwargs):  # noqa: E501
-        """get_mpm_enable_status  # noqa: E501
+    def get_mpm_enabled_status_with_http_info(self, domain_id, **kwargs):  # noqa: E501
+        """get_mpm_enabled_status  # noqa: E501
 
-        Get MPM Enable Status  # noqa: E501
+        Get MPM enable status  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_mpm_enable_status_with_http_info(domain_id, async_req=True)
+        >>> thread = api.get_mpm_enabled_status_with_http_info(domain_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -739,14 +1060,14 @@ class MpmControllerApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_mpm_enable_status" % key
+                    " to method get_mpm_enabled_status" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'domain_id' is set
         if ('domain_id' not in params or
                 params['domain_id'] is None):
-            raise ValueError("Missing the required parameter `domain_id` when calling `get_mpm_enable_status`")  # noqa: E501
+            raise ValueError("Missing the required parameter `domain_id` when calling `get_mpm_enabled_status`")  # noqa: E501
 
         collection_formats = {}
 
@@ -785,47 +1106,47 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_plot_type(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def get_plot_type(self, domain_id, model_id, **kwargs):  # noqa: E501
         """get_plot_type  # noqa: E501
 
         Get plot type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_plot_type(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.get_plot_type(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: GetMpmPlotTypes
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_plot_type_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.get_plot_type_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_plot_type_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.get_plot_type_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def get_plot_type_with_http_info(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def get_plot_type_with_http_info(self, domain_id, model_id, **kwargs):  # noqa: E501
         """get_plot_type  # noqa: E501
 
         Get plot type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_plot_type_with_http_info(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.get_plot_type_with_http_info(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: GetMpmPlotTypes
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -844,18 +1165,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `get_plot_type`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `get_plot_type`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `get_plot_type`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -873,7 +1194,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/plotTypes', 'GET',
             path_params,
             query_params,
             header_params,
@@ -888,51 +1209,51 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_plot_type_data(self, domain_id, unified_model_id, plot_type, _date, **kwargs):  # noqa: E501
+    def get_plot_type_data(self, domain_id, model_id, plot_type, _date, **kwargs):  # noqa: E501
         """get_plot_type_data  # noqa: E501
 
-        Get Plot type data  # noqa: E501
+        Get plot type data  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_plot_type_data(domain_id, unified_model_id, plot_type, _date, async_req=True)
+        >>> thread = api.get_plot_type_data(domain_id, model_id, plot_type, _date, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
-        :param datetime _date: Date identifier (required)
+        :param date _date: Date identifier (required)
         :return: MpmPlotDataDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_plot_type_data_with_http_info(domain_id, unified_model_id, plot_type, _date, **kwargs)  # noqa: E501
+            return self.get_plot_type_data_with_http_info(domain_id, model_id, plot_type, _date, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_plot_type_data_with_http_info(domain_id, unified_model_id, plot_type, _date, **kwargs)  # noqa: E501
+            (data) = self.get_plot_type_data_with_http_info(domain_id, model_id, plot_type, _date, **kwargs)  # noqa: E501
             return data
 
-    def get_plot_type_data_with_http_info(self, domain_id, unified_model_id, plot_type, _date, **kwargs):  # noqa: E501
+    def get_plot_type_data_with_http_info(self, domain_id, model_id, plot_type, _date, **kwargs):  # noqa: E501
         """get_plot_type_data  # noqa: E501
 
-        Get Plot type data  # noqa: E501
+        Get plot type data  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_plot_type_data_with_http_info(domain_id, unified_model_id, plot_type, _date, async_req=True)
+        >>> thread = api.get_plot_type_data_with_http_info(domain_id, model_id, plot_type, _date, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :param str plot_type: PlotType identifier (required)
-        :param datetime _date: Date identifier (required)
+        :param date _date: Date identifier (required)
         :return: MpmPlotDataDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id', 'plot_type', '_date']  # noqa: E501
+        all_params = ['domain_id', 'model_id', 'plot_type', '_date']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -951,10 +1272,10 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `get_plot_type_data`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `get_plot_type_data`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `get_plot_type_data`")  # noqa: E501
         # verify the required parameter 'plot_type' is set
         if ('plot_type' not in params or
                 params['plot_type'] is None):
@@ -969,8 +1290,8 @@ class MpmControllerApi(object):
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
         if 'plot_type' in params:
             path_params['plotType'] = params['plot_type']  # noqa: E501
         if '_date' in params:
@@ -992,7 +1313,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes/{plotType}/dates/{date}', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/plotTypes/{plotType}/dates/{date}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1007,47 +1328,47 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def list_alert_incidents(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def list_alert_incidents(self, domain_id, model_id, **kwargs):  # noqa: E501
         """list_alert_incidents  # noqa: E501
 
         List alert incidents  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_alert_incidents(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.list_alert_incidents(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: list[MpmAlertIncidentDto]
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.list_alert_incidents_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.list_alert_incidents_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.list_alert_incidents_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.list_alert_incidents_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def list_alert_incidents_with_http_info(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def list_alert_incidents_with_http_info(self, domain_id, model_id, **kwargs):  # noqa: E501
         """list_alert_incidents  # noqa: E501
 
         List alert incidents  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_alert_incidents_with_http_info(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.list_alert_incidents_with_http_info(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: list[MpmAlertIncidentDto]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1066,18 +1387,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `list_alert_incidents`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `list_alert_incidents`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `list_alert_incidents`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -1095,7 +1416,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertIncidents', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/alertIncidents', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1110,47 +1431,47 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def list_alert_policies(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def list_alert_policies(self, domain_id, model_id, **kwargs):  # noqa: E501
         """list_alert_policies  # noqa: E501
 
         List alert policies  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_alert_policies(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.list_alert_policies(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: list[MpmAlertPolicyDto]
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.list_alert_policies_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.list_alert_policies_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.list_alert_policies_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.list_alert_policies_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def list_alert_policies_with_http_info(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def list_alert_policies_with_http_info(self, domain_id, model_id, **kwargs):  # noqa: E501
         """list_alert_policies  # noqa: E501
 
         List alert policies  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_alert_policies_with_http_info(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.list_alert_policies_with_http_info(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: list[MpmAlertPolicyDto]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1169,18 +1490,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `list_alert_policies`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `list_alert_policies`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `list_alert_policies`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -1198,7 +1519,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/alertPolicies', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1224,7 +1545,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :return: list[ModelDto]
+        :return: list[ListMpmModelDto]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1246,7 +1567,7 @@ class MpmControllerApi(object):
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :return: list[ModelDto]
+        :return: list[ListMpmModelDto]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1300,7 +1621,7 @@ class MpmControllerApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[ModelDto]',  # noqa: E501
+            response_type='list[ListMpmModelDto]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -1308,18 +1629,18 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def overview_main_metric(self, domain_id, unified_model_id, main_metric, **kwargs):  # noqa: E501
+    def overview_main_metric(self, domain_id, model_id, main_metric, **kwargs):  # noqa: E501
         """overview_main_metric  # noqa: E501
 
         Get model main metric  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.overview_main_metric(domain_id, unified_model_id, main_metric, async_req=True)
+        >>> thread = api.overview_main_metric(domain_id, model_id, main_metric, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :param str main_metric: Evaluation metric (required)
         :return: MainMetricDto
                  If the method is called asynchronously,
@@ -1327,30 +1648,30 @@ class MpmControllerApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.overview_main_metric_with_http_info(domain_id, unified_model_id, main_metric, **kwargs)  # noqa: E501
+            return self.overview_main_metric_with_http_info(domain_id, model_id, main_metric, **kwargs)  # noqa: E501
         else:
-            (data) = self.overview_main_metric_with_http_info(domain_id, unified_model_id, main_metric, **kwargs)  # noqa: E501
+            (data) = self.overview_main_metric_with_http_info(domain_id, model_id, main_metric, **kwargs)  # noqa: E501
             return data
 
-    def overview_main_metric_with_http_info(self, domain_id, unified_model_id, main_metric, **kwargs):  # noqa: E501
+    def overview_main_metric_with_http_info(self, domain_id, model_id, main_metric, **kwargs):  # noqa: E501
         """overview_main_metric  # noqa: E501
 
         Get model main metric  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.overview_main_metric_with_http_info(domain_id, unified_model_id, main_metric, async_req=True)
+        >>> thread = api.overview_main_metric_with_http_info(domain_id, model_id, main_metric, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :param str main_metric: Evaluation metric (required)
         :return: MainMetricDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id', 'main_metric']  # noqa: E501
+        all_params = ['domain_id', 'model_id', 'main_metric']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1369,10 +1690,10 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `overview_main_metric`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `overview_main_metric`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `overview_main_metric`")  # noqa: E501
         # verify the required parameter 'main_metric' is set
         if ('main_metric' not in params or
                 params['main_metric'] is None):
@@ -1383,8 +1704,8 @@ class MpmControllerApi(object):
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
         if 'main_metric' in params:
             path_params['mainMetric'] = params['main_metric']  # noqa: E501
 
@@ -1404,7 +1725,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/mainmetric/{mainMetric}', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/mainmetric/{mainMetric}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1419,47 +1740,47 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def overview_metadata(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def overview_metadata(self, domain_id, model_id, **kwargs):  # noqa: E501
         """overview_metadata  # noqa: E501
 
         Get model metadata  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.overview_metadata(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.overview_metadata(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
-        :return: ModelMetadataDto
+        :param str model_id: Model identifier (required)
+        :return: MpmModelMetadataDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.overview_metadata_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.overview_metadata_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.overview_metadata_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.overview_metadata_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def overview_metadata_with_http_info(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def overview_metadata_with_http_info(self, domain_id, model_id, **kwargs):  # noqa: E501
         """overview_metadata  # noqa: E501
 
         Get model metadata  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.overview_metadata_with_http_info(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.overview_metadata_with_http_info(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
-        :return: ModelMetadataDto
+        :param str model_id: Model identifier (required)
+        :return: MpmModelMetadataDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1478,18 +1799,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `overview_metadata`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `overview_metadata`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `overview_metadata`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -1507,14 +1828,14 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/metadata', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/metadata', 'GET',
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ModelMetadataDto',  # noqa: E501
+            response_type='MpmModelMetadataDto',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -1522,47 +1843,47 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def overview_predictions(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def overview_predictions(self, domain_id, model_id, **kwargs):  # noqa: E501
         """overview_predictions  # noqa: E501
 
         Get model predictions count  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.overview_predictions(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.overview_predictions(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :return: PredictionsCountDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.overview_predictions_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.overview_predictions_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.overview_predictions_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.overview_predictions_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def overview_predictions_with_http_info(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def overview_predictions_with_http_info(self, domain_id, model_id, **kwargs):  # noqa: E501
         """overview_predictions  # noqa: E501
 
         Get model predictions count  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.overview_predictions_with_http_info(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.overview_predictions_with_http_info(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :return: PredictionsCountDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1581,18 +1902,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `overview_predictions`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `overview_predictions`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `overview_predictions`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -1610,7 +1931,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictions', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/predictions', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1625,47 +1946,47 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def predicted_vs_actual(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def predicted_vs_actual(self, domain_id, model_id, **kwargs):  # noqa: E501
         """predicted_vs_actual  # noqa: E501
 
         Get predicted vs actual  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.predicted_vs_actual(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.predicted_vs_actual(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :return: PredictedVsActualDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.predicted_vs_actual_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.predicted_vs_actual_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.predicted_vs_actual_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.predicted_vs_actual_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def predicted_vs_actual_with_http_info(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def predicted_vs_actual_with_http_info(self, domain_id, model_id, **kwargs):  # noqa: E501
         """predicted_vs_actual  # noqa: E501
 
         Get predicted vs actual  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.predicted_vs_actual_with_http_info(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.predicted_vs_actual_with_http_info(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :return: PredictedVsActualDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1684,18 +2005,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `predicted_vs_actual`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `predicted_vs_actual`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `predicted_vs_actual`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -1713,7 +2034,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictedVsActual', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/predictedVsActual', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1728,47 +2049,47 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def prediction_mean(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def prediction_mean(self, domain_id, model_id, **kwargs):  # noqa: E501
         """prediction_mean  # noqa: E501
 
         Get predictions mean  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.prediction_mean(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.prediction_mean(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :return: PredictionMeansDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.prediction_mean_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.prediction_mean_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.prediction_mean_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.prediction_mean_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def prediction_mean_with_http_info(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def prediction_mean_with_http_info(self, domain_id, model_id, **kwargs):  # noqa: E501
         """prediction_mean  # noqa: E501
 
         Get predictions mean  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.prediction_mean_with_http_info(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.prediction_mean_with_http_info(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :return: PredictionMeansDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1787,18 +2108,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `prediction_mean`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `prediction_mean`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `prediction_mean`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -1816,7 +2137,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictionsMean', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/predictionsMean', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1831,47 +2152,47 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def prediction_sum(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def prediction_sum(self, domain_id, model_id, **kwargs):  # noqa: E501
         """prediction_sum  # noqa: E501
 
         Get predictions sum  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.prediction_sum(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.prediction_sum(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :return: PredictionsSumDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.prediction_sum_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.prediction_sum_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.prediction_sum_with_http_info(domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.prediction_sum_with_http_info(domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def prediction_sum_with_http_info(self, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def prediction_sum_with_http_info(self, domain_id, model_id, **kwargs):  # noqa: E501
         """prediction_sum  # noqa: E501
 
         Get predictions sum  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.prediction_sum_with_http_info(domain_id, unified_model_id, async_req=True)
+        >>> thread = api.prediction_sum_with_http_info(domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: Model identifier (required)
+        :param str model_id: Model identifier (required)
         :return: PredictionsSumDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1890,18 +2211,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `prediction_sum`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `prediction_sum`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `prediction_sum`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -1919,7 +2240,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictionsSum', 'GET',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/predictionsSum', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1934,49 +2255,49 @@ class MpmControllerApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_alert_policy(self, body, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def update_alert_policy(self, body, domain_id, model_id, **kwargs):  # noqa: E501
         """update_alert_policy  # noqa: E501
 
         Update an alert policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_alert_policy(body, domain_id, unified_model_id, async_req=True)
+        >>> thread = api.update_alert_policy(body, domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MpmAlertPolicyDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_alert_policy_with_http_info(body, domain_id, unified_model_id, **kwargs)  # noqa: E501
+            return self.update_alert_policy_with_http_info(body, domain_id, model_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_alert_policy_with_http_info(body, domain_id, unified_model_id, **kwargs)  # noqa: E501
+            (data) = self.update_alert_policy_with_http_info(body, domain_id, model_id, **kwargs)  # noqa: E501
             return data
 
-    def update_alert_policy_with_http_info(self, body, domain_id, unified_model_id, **kwargs):  # noqa: E501
+    def update_alert_policy_with_http_info(self, body, domain_id, model_id, **kwargs):  # noqa: E501
         """update_alert_policy  # noqa: E501
 
         Update an alert policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_alert_policy_with_http_info(body, domain_id, unified_model_id, async_req=True)
+        >>> thread = api.update_alert_policy_with_http_info(body, domain_id, model_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MpmAlertPolicyDto body: (required)
         :param str domain_id: Domain identifier (required)
-        :param str unified_model_id: ManagedService identifier and model identifier concatenated with '_' (required)
+        :param str model_id: Model identifier (required)
         :return: MpmAlertPolicyDto
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'domain_id', 'unified_model_id']  # noqa: E501
+        all_params = ['body', 'domain_id', 'model_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1999,18 +2320,18 @@ class MpmControllerApi(object):
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `update_alert_policy`")  # noqa: E501
-        # verify the required parameter 'unified_model_id' is set
-        if ('unified_model_id' not in params or
-                params['unified_model_id'] is None):
-            raise ValueError("Missing the required parameter `unified_model_id` when calling `update_alert_policy`")  # noqa: E501
+        # verify the required parameter 'model_id' is set
+        if ('model_id' not in params or
+                params['model_id'] is None):
+            raise ValueError("Missing the required parameter `model_id` when calling `update_alert_policy`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'domain_id' in params:
             path_params['domainId'] = params['domain_id']  # noqa: E501
-        if 'unified_model_id' in params:
-            path_params['unifiedModelId'] = params['unified_model_id']  # noqa: E501
+        if 'model_id' in params:
+            path_params['modelId'] = params['model_id']  # noqa: E501
 
         query_params = []
 
@@ -2034,7 +2355,7 @@ class MpmControllerApi(object):
         auth_settings = ['bearer-key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies', 'PUT',
+            '/api/mpm/v1/domains/{domainId}/models/{modelId}/alertPolicies', 'PUT',
             path_params,
             query_params,
             header_params,

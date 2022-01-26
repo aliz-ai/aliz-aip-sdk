@@ -615,7 +615,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/alertPolicies": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -633,12 +633,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -675,12 +676,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -724,12 +726,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2007,13 +2010,13 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/enable": {
+    "/api/mpm/v1/domains/{domainId}/models": {
       "get": {
         "tags": [
           "mpm-controller"
         ],
-        "description": "Get MPM Enable Status",
-        "operationId": "getMPMEnableStatus",
+        "description": "List models",
+        "operationId": "listModels_1",
         "parameters": [
           {
             "name": "domainId",
@@ -2027,7 +2030,82 @@
         ],
         "responses": {
           "200": {
-            "description": "MPM Enable Status",
+            "description": "Successful list",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListMpmModelDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Create an MPM model",
+        "operationId": "createMpmModel",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMpmModelDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MpmModelDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/enable": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get MPM enable status",
+        "operationId": "getMpmEnabledStatus",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get MPM Status",
             "content": {
               "*/*": {
                 "schema": {
@@ -2043,7 +2121,7 @@
           "mpm-controller"
         ],
         "description": "Enable MPM",
-        "operationId": "enableMPM",
+        "operationId": "enableMpm",
         "parameters": [
           {
             "name": "domainId",
@@ -2067,7 +2145,14 @@
         },
         "responses": {
           "200": {
-            "description": "MPM Successfully enabled"
+            "description": "MPM successfully enabled",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedInstanceDto"
+                }
+              }
+            }
           }
         }
       }
@@ -3563,42 +3648,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models": {
-      "get": {
-        "tags": [
-          "mpm-controller"
-        ],
-        "description": "List models",
-        "operationId": "listModels_1",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "description": "Domain identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful list",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ModelDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictions": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/predictions": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -3616,12 +3666,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
             "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3639,7 +3690,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictionsSum": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/predictionsSum": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -3657,12 +3708,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
             "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3680,7 +3732,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictionsMean": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/predictionsMean": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -3698,12 +3750,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
             "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3721,7 +3774,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/predictedVsActual": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/predictedVsActual": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -3739,12 +3792,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
             "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3762,7 +3816,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/plotTypes": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -3780,12 +3834,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3803,7 +3858,68 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes/{plotType}/dates": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/plotTypes/{plotType}": {
+      "get": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Get historical plot type data",
+        "operationId": "getHistoricalPlotTypeData",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "plotType",
+            "in": "path",
+            "description": "PlotType identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ROC_CURVE",
+                "PRECISION_RECALL_CURVE",
+                "KOLMOGOROV_SMIRNOV_PLOT",
+                "LIFT_PLOT",
+                "LIFT_TABLE"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Historical plot type data",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MpmHistoricalPlotDataDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/plotTypes/{plotType}/dates": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -3821,12 +3937,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -3860,12 +3977,12 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/plotTypes/{plotType}/dates/{date}": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/plotTypes/{plotType}/dates/{date}": {
       "get": {
         "tags": [
           "mpm-controller"
         ],
-        "description": "Get Plot type data",
+        "description": "Get plot type data",
         "operationId": "getPlotTypeData",
         "parameters": [
           {
@@ -3878,12 +3995,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -3909,7 +4027,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date"
             }
           }
         ],
@@ -3927,7 +4045,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/metadata": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/metadata": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -3945,12 +4063,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3960,7 +4079,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/ModelMetadataDto"
+                  "$ref": "#/components/schemas/MpmModelMetadataDto"
                 }
               }
             }
@@ -3968,7 +4087,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/mainmetric/{mainMetric}": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/mainmetric/{mainMetric}": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -3986,12 +4105,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
             "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4002,7 +4122,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "MSE"
+                "MSE",
+                "AUC"
               ]
             }
           }
@@ -4021,7 +4142,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertPolicies/{alertPolicyId}": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/alertPolicies/{alertPolicyId}": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -4039,12 +4160,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4088,12 +4210,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4114,7 +4237,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertIncidents": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/alertIncidents": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -4132,12 +4255,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -4158,7 +4282,7 @@
         }
       }
     },
-    "/api/mpm/v1/domains/{domainId}/models/{unifiedModelId}/alertIncidents/{alertIncidentId}": {
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}/alertIncidents/{alertIncidentId}": {
       "get": {
         "tags": [
           "mpm-controller"
@@ -4176,12 +4300,13 @@
             }
           },
           {
-            "name": "unifiedModelId",
+            "name": "modelId",
             "in": "path",
-            "description": "ManagedService identifier and model identifier concatenated with '_'",
+            "description": "Model identifier",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4809,6 +4934,41 @@
           }
         }
       }
+    },
+    "/api/mpm/v1/domains/{domainId}/models/{modelId}": {
+      "delete": {
+        "tags": [
+          "mpm-controller"
+        ],
+        "description": "Delete an MPM model",
+        "operationId": "deleteMpmModel",
+        "parameters": [
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "Domain identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful delete"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -5191,6 +5351,36 @@
         },
         "description": "Managed instance definition JSON"
       },
+      "CreateMpmModelDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "REGRESSION",
+              "CLASSIFICATION"
+            ]
+          },
+          "mainEvaluationMetricType": {
+            "type": "string",
+            "enum": [
+              "MSE",
+              "AUC"
+            ]
+          },
+          "modelPeriodicity": {
+            "type": "string",
+            "enum": [
+              "DAY",
+              "WEEK",
+              "MONTH"
+            ]
+          }
+        }
+      },
       "CreateTemplateDto": {
         "type": "object",
         "properties": {
@@ -5325,8 +5515,8 @@
           "mpmGcpProjectId": {
             "type": "string"
           },
-          "createMpmGcpProjectBqResources": {
-            "type": "boolean"
+          "zone": {
+            "type": "string"
           }
         },
         "description": "Managed instance definition JSON"
@@ -5419,7 +5609,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "format": "date-time"
+              "format": "date"
             }
           }
         }
@@ -5427,8 +5617,18 @@
       "GetMpmEnabledStatusDto": {
         "type": "object",
         "properties": {
-          "enabled": {
+          "enabledOnDomain": {
             "type": "boolean"
+          },
+          "serviceStatus": {
+            "type": "string",
+            "enum": [
+              "DEPLOY_PENDING",
+              "DEPLOY_SUCCESS",
+              "DEPLOY_ERROR",
+              "DESTROY_PENDING",
+              "DESTROY_ERROR"
+            ]
           }
         }
       },
@@ -5463,7 +5663,8 @@
               "type": "string",
               "enum": [
                 "MLFLOW",
-                "KUBEFLOW"
+                "KUBEFLOW",
+                "MPM"
               ]
             }
           },
@@ -5494,16 +5695,29 @@
           }
         }
       },
-      "MainMetricDto": {
+      "ListMpmModelDto": {
         "type": "object",
         "properties": {
           "modelId": {
             "type": "string"
           },
+          "modelName": {
+            "type": "string"
+          }
+        }
+      },
+      "MainMetricDto": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "mainMetric": {
             "type": "string",
             "enum": [
-              "MSE"
+              "MSE",
+              "AUC"
             ]
           },
           "currentValue": {
@@ -5538,7 +5752,8 @@
             "type": "string",
             "enum": [
               "MLFLOW",
-              "KUBEFLOW"
+              "KUBEFLOW",
+              "MPM"
             ]
           },
           "state": {
@@ -5596,72 +5811,6 @@
           }
         }
       },
-      "ModelDto": {
-        "type": "object",
-        "properties": {
-          "unifiedModelId": {
-            "type": "string"
-          },
-          "modelName": {
-            "type": "string"
-          }
-        }
-      },
-      "ModelMetadataDto": {
-        "type": "object",
-        "properties": {
-          "unifiedModelId": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "creator": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "modelType": {
-            "type": "string",
-            "enum": [
-              "REGRESSION",
-              "CLASSIFICATION"
-            ]
-          },
-          "evaluationMetric": {
-            "type": "string",
-            "enum": [
-              "MSE"
-            ]
-          },
-          "modelPeriodicity": {
-            "type": "string",
-            "enum": [
-              "DAY",
-              "WEEK",
-              "MONTH"
-            ]
-          },
-          "modelRegistryLink": {
-            "type": "string"
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "lastUpdatedDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string"
-          },
-          "apiLink": {
-            "type": "string"
-          }
-        }
-      },
       "MpmAlertIncidentDto": {
         "type": "object",
         "properties": {
@@ -5702,11 +5851,10 @@
       },
       "MpmAlertPolicyDto": {
         "required": [
-          "comparison",
-          "duration",
+          "condition",
           "metricType",
           "policyName",
-          "threshold"
+          "value"
         ],
         "type": "object",
         "properties": {
@@ -5720,27 +5868,154 @@
           "metricType": {
             "type": "string",
             "enum": [
-              "FEATURE_DRIFT"
+              "ROC_CURVE_AUC",
+              "KS_STATISTICS",
+              "PR_CURVE_AP"
             ]
           },
-          "threshold": {
+          "value": {
             "type": "number",
             "format": "float"
           },
-          "comparison": {
+          "condition": {
             "type": "string",
             "enum": [
-              "COMPARISON_GT",
-              "COMPARISON_GE",
-              "COMPARISON_LT",
-              "COMPARISON_LE",
-              "COMPARISON_EQ",
-              "COMPARISON_NE"
+              "GREATER_THAN",
+              "GREATER_THAN_OR_EQUAL",
+              "LESS_THAN",
+              "LESS_THAN_OR_EQUAL",
+              "EQUAL",
+              "NOT_EQUAL",
+              "INCREASED_BY",
+              "DECREASED_BY",
+              "CHANGED_BY"
             ]
           },
-          "duration": {
+          "conditionWindow": {
+            "type": "string",
+            "enum": [
+              "COUNT",
+              "HOUR",
+              "DAY"
+            ]
+          },
+          "conditionWindowSize": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "MpmHistoricalPlotDataDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "plotDataItems": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          },
+          "classNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "MpmModelDto": {
+        "type": "object",
+        "properties": {
+          "mpmModelId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "REGRESSION",
+              "CLASSIFICATION"
+            ]
+          },
+          "mainEvaluationMetricType": {
+            "type": "string",
+            "enum": [
+              "MSE",
+              "AUC"
+            ]
+          },
+          "modelPeriodicity": {
+            "type": "string",
+            "enum": [
+              "DAY",
+              "WEEK",
+              "MONTH"
+            ]
+          }
+        }
+      },
+      "MpmModelMetadataDto": {
+        "type": "object",
+        "properties": {
+          "modelId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "creator": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "modelType": {
+            "type": "string",
+            "enum": [
+              "REGRESSION",
+              "CLASSIFICATION"
+            ]
+          },
+          "evaluationMetric": {
+            "type": "string",
+            "enum": [
+              "MSE",
+              "AUC"
+            ]
+          },
+          "modelPeriodicity": {
+            "type": "string",
+            "enum": [
+              "DAY",
+              "WEEK",
+              "MONTH"
+            ]
+          },
+          "modelRegistryLink": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string"
+          },
+          "apiLink": {
+            "type": "string"
           }
         }
       },
@@ -5749,7 +6024,7 @@
         "properties": {
           "date": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "data": {
             "type": "object"
@@ -5817,15 +6092,15 @@
           "pageable": {
             "$ref": "#/components/schemas/Pageable"
           },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
           "first": {
             "type": "boolean"
           },
           "last": {
             "type": "boolean"
-          },
-          "numberOfElements": {
-            "type": "integer",
-            "format": "int32"
           },
           "empty": {
             "type": "boolean"
@@ -5863,15 +6138,15 @@
           "pageable": {
             "$ref": "#/components/schemas/Pageable"
           },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
           "first": {
             "type": "boolean"
           },
           "last": {
             "type": "boolean"
-          },
-          "numberOfElements": {
-            "type": "integer",
-            "format": "int32"
           },
           "empty": {
             "type": "boolean"
@@ -5936,7 +6211,8 @@
         "type": "object",
         "properties": {
           "modelId": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "metrics": {
             "type": "array",

@@ -29,23 +29,23 @@ class EnableMpmDto(object):
     """
     swagger_types = {
         'mpm_gcp_project_id': 'str',
-        'create_mpm_gcp_project_bq_resources': 'bool'
+        'zone': 'str'
     }
 
     attribute_map = {
         'mpm_gcp_project_id': 'mpmGcpProjectId',
-        'create_mpm_gcp_project_bq_resources': 'createMpmGcpProjectBqResources'
+        'zone': 'zone'
     }
 
-    def __init__(self, mpm_gcp_project_id=None, create_mpm_gcp_project_bq_resources=None):  # noqa: E501
+    def __init__(self, mpm_gcp_project_id=None, zone=None):  # noqa: E501
         """EnableMpmDto - a model defined in Swagger"""  # noqa: E501
         self._mpm_gcp_project_id = None
-        self._create_mpm_gcp_project_bq_resources = None
+        self._zone = None
         self.discriminator = None
         if mpm_gcp_project_id is not None:
             self.mpm_gcp_project_id = mpm_gcp_project_id
-        if create_mpm_gcp_project_bq_resources is not None:
-            self.create_mpm_gcp_project_bq_resources = create_mpm_gcp_project_bq_resources
+        if zone is not None:
+            self.zone = zone
 
     @property
     def mpm_gcp_project_id(self):
@@ -69,25 +69,25 @@ class EnableMpmDto(object):
         self._mpm_gcp_project_id = mpm_gcp_project_id
 
     @property
-    def create_mpm_gcp_project_bq_resources(self):
-        """Gets the create_mpm_gcp_project_bq_resources of this EnableMpmDto.  # noqa: E501
+    def zone(self):
+        """Gets the zone of this EnableMpmDto.  # noqa: E501
 
 
-        :return: The create_mpm_gcp_project_bq_resources of this EnableMpmDto.  # noqa: E501
-        :rtype: bool
+        :return: The zone of this EnableMpmDto.  # noqa: E501
+        :rtype: str
         """
-        return self._create_mpm_gcp_project_bq_resources
+        return self._zone
 
-    @create_mpm_gcp_project_bq_resources.setter
-    def create_mpm_gcp_project_bq_resources(self, create_mpm_gcp_project_bq_resources):
-        """Sets the create_mpm_gcp_project_bq_resources of this EnableMpmDto.
+    @zone.setter
+    def zone(self, zone):
+        """Sets the zone of this EnableMpmDto.
 
 
-        :param create_mpm_gcp_project_bq_resources: The create_mpm_gcp_project_bq_resources of this EnableMpmDto.  # noqa: E501
-        :type: bool
+        :param zone: The zone of this EnableMpmDto.  # noqa: E501
+        :type: str
         """
 
-        self._create_mpm_gcp_project_bq_resources = create_mpm_gcp_project_bq_resources
+        self._zone = zone
 
     def to_dict(self):
         """Returns the model properties as a dict"""

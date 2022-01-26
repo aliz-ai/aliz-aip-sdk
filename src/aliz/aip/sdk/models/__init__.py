@@ -33,6 +33,7 @@ from aliz.aip.sdk.models.create_base_template_dto import CreateBaseTemplateDto
 from aliz.aip.sdk.models.create_clone_template_dto import CreateCloneTemplateDto
 from aliz.aip.sdk.models.create_empty_template_dto import CreateEmptyTemplateDto
 from aliz.aip.sdk.models.create_managed_service_dto import CreateManagedServiceDto
+from aliz.aip.sdk.models.create_mpm_model_dto import CreateMpmModelDto
 from aliz.aip.sdk.models.create_template_dto import CreateTemplateDto
 from aliz.aip.sdk.models.delete_workspace_dto import DeleteWorkspaceDto
 from aliz.aip.sdk.models.domain_dto import DomainDto
@@ -46,15 +47,17 @@ from aliz.aip.sdk.models.get_mpm_plot_types import GetMpmPlotTypes
 from aliz.aip.sdk.models.get_template_variables_dto import GetTemplateVariablesDto
 from aliz.aip.sdk.models.git_auth import GitAuth
 from aliz.aip.sdk.models.git_settings_dto import GitSettingsDto
+from aliz.aip.sdk.models.list_mpm_model_dto import ListMpmModelDto
 from aliz.aip.sdk.models.main_metric_dto import MainMetricDto
 from aliz.aip.sdk.models.managed_instance_dto import ManagedInstanceDto
 from aliz.aip.sdk.models.managed_service_user_dto import ManagedServiceUserDto
 from aliz.aip.sdk.models.message_dto import MessageDto
 from aliz.aip.sdk.models.metric_value_dto import MetricValueDto
-from aliz.aip.sdk.models.model_dto import ModelDto
-from aliz.aip.sdk.models.model_metadata_dto import ModelMetadataDto
 from aliz.aip.sdk.models.mpm_alert_incident_dto import MpmAlertIncidentDto
 from aliz.aip.sdk.models.mpm_alert_policy_dto import MpmAlertPolicyDto
+from aliz.aip.sdk.models.mpm_historical_plot_data_dto import MpmHistoricalPlotDataDto
+from aliz.aip.sdk.models.mpm_model_dto import MpmModelDto
+from aliz.aip.sdk.models.mpm_model_metadata_dto import MpmModelMetadataDto
 from aliz.aip.sdk.models.mpm_plot_data_dto import MpmPlotDataDto
 from aliz.aip.sdk.models.notification_dto import NotificationDto
 from aliz.aip.sdk.models.one_ofdomains_domain_id_body import OneOfdomainsDomainIdBody

@@ -28,40 +28,72 @@ class GetMpmEnabledStatusDto(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'enabled': 'bool'
+        'enabled_on_domain': 'bool',
+        'service_status': 'str'
     }
 
     attribute_map = {
-        'enabled': 'enabled'
+        'enabled_on_domain': 'enabledOnDomain',
+        'service_status': 'serviceStatus'
     }
 
-    def __init__(self, enabled=None):  # noqa: E501
+    def __init__(self, enabled_on_domain=None, service_status=None):  # noqa: E501
         """GetMpmEnabledStatusDto - a model defined in Swagger"""  # noqa: E501
-        self._enabled = None
+        self._enabled_on_domain = None
+        self._service_status = None
         self.discriminator = None
-        if enabled is not None:
-            self.enabled = enabled
+        if enabled_on_domain is not None:
+            self.enabled_on_domain = enabled_on_domain
+        if service_status is not None:
+            self.service_status = service_status
 
     @property
-    def enabled(self):
-        """Gets the enabled of this GetMpmEnabledStatusDto.  # noqa: E501
+    def enabled_on_domain(self):
+        """Gets the enabled_on_domain of this GetMpmEnabledStatusDto.  # noqa: E501
 
 
-        :return: The enabled of this GetMpmEnabledStatusDto.  # noqa: E501
+        :return: The enabled_on_domain of this GetMpmEnabledStatusDto.  # noqa: E501
         :rtype: bool
         """
-        return self._enabled
+        return self._enabled_on_domain
 
-    @enabled.setter
-    def enabled(self, enabled):
-        """Sets the enabled of this GetMpmEnabledStatusDto.
+    @enabled_on_domain.setter
+    def enabled_on_domain(self, enabled_on_domain):
+        """Sets the enabled_on_domain of this GetMpmEnabledStatusDto.
 
 
-        :param enabled: The enabled of this GetMpmEnabledStatusDto.  # noqa: E501
+        :param enabled_on_domain: The enabled_on_domain of this GetMpmEnabledStatusDto.  # noqa: E501
         :type: bool
         """
 
-        self._enabled = enabled
+        self._enabled_on_domain = enabled_on_domain
+
+    @property
+    def service_status(self):
+        """Gets the service_status of this GetMpmEnabledStatusDto.  # noqa: E501
+
+
+        :return: The service_status of this GetMpmEnabledStatusDto.  # noqa: E501
+        :rtype: str
+        """
+        return self._service_status
+
+    @service_status.setter
+    def service_status(self, service_status):
+        """Sets the service_status of this GetMpmEnabledStatusDto.
+
+
+        :param service_status: The service_status of this GetMpmEnabledStatusDto.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["DEPLOY_PENDING", "DEPLOY_SUCCESS", "DEPLOY_ERROR", "DESTROY_PENDING", "DESTROY_ERROR"]  # noqa: E501
+        if service_status not in allowed_values:
+            raise ValueError(
+                "Invalid value for `service_status` ({0}), must be one of {1}"  # noqa: E501
+                .format(service_status, allowed_values)
+            )
+
+        self._service_status = service_status
 
     def to_dict(self):
         """Returns the model properties as a dict"""
