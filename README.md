@@ -11,10 +11,18 @@ To set-up the tool in a virtual environment:
 ```shell
 cd /path/to/host/the/venv
 
+# Option 1 - From the GitHub repository
 virtualenv -p python3 venv
 source venv/bin/activate
 pip install -U pip setuptools
 pip install "git+https://github.com/aliz-ai/aliz-aip-sdk.git@master"
+
+# Option 2 - From the Google Artifact Registry
+virtualenv -p python3 venv
+source venv/bin/activate
+pip install -U pip setuptools
+pip install keyrings.google-artifactregistry-auth
+pip install --extra-index-url "https://europe-python.pkg.dev/aliz-aip-dev/aip-python/simple/" aliz-aip-sdk
 ```
 
 ## Usage
